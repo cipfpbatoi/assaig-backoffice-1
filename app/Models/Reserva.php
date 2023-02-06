@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Reserva extends Model
 {
     use HasFactory;
+    public function fecha()
+    {
+        return $this->belongsTo(Fecha::class, 'fecha_id');
+    }
 }
