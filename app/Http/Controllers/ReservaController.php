@@ -64,7 +64,7 @@ class ReservaController extends Controller
     public function show(Reserva $reserva)
     {
         $reservaToFind = Reserva::findOrFail($reserva->id);
-        return view('reserva.show', 'reservaToFind');
+        //return view('reserva.show', 'reservaToFind');
     }
 
     /**
@@ -76,7 +76,7 @@ class ReservaController extends Controller
     public function edit(Reserva $reserva)
     {
         $reservaToFind = Reserva::findOrFail($reserva->id);
-        return view('reserva.edit', compact($reservaToFind));
+        //return view('reserva.edit', compact($reservaToFind));
     }
 
     /**
@@ -98,7 +98,7 @@ class ReservaController extends Controller
         $reservaToEdit->confirmada = $request->confirmada;
         $reservaToEdit->save();
 
-        return view('reserva.show', compact('reservaToEdit'));
+        //return view('reserva.show', compact('reservaToEdit'));
     }
 
     /**
