@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class ProfesoresFactory extends Factory
+class AlergenoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class ProfesoresFactory extends Factory
     {
         return [
             'nombre'=> fake()->name(),
-            'tipo' => fake()->randomElements(['cocina', 'sala']),
+            'icono' => fake()->numberBetween(0, 100),
         ];
     }
 }
