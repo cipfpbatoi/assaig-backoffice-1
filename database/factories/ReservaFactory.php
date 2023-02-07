@@ -19,11 +19,11 @@ class ReservaFactory extends Factory
         return [
             'nombre'=> fake()->name(),
             'email'=> fake()->unique()->safeEmail(),
-            'telefono'=> fake()->phoneNumber(),
+            'telefono'=> fake()->numberBetween(0, 99999999),
             'comensales'=> fake()->unique()->numberBetween(5,7),
-            'obervaciones' => fake()->sentence(2),
+            'observaciones' => fake()->sentence(2),
             'localizador' => fake()->lexify('???'),
-            'confirmado' => fake()->boolean(),
+            'confirmada' => fake()->boolean(),
 
         ];
     }

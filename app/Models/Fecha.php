@@ -13,4 +13,19 @@ class Fecha extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function profesor_fecha_cocinas()
+    {
+        return $this->hasMany(Profesor_fecha_cocina::class);
+    }
+
+    public function profesor_fecha_salas()
+    {
+        return $this->hasMany(Profesor_fecha_sala::class);
+    }
+
+    public function fechas()
+    {
+        return $this->hasMany(Fecha::class);
+    }
 }
