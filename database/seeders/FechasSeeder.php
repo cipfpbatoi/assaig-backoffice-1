@@ -2,15 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Alergeno;
 use App\Models\Fecha;
-use App\Models\Profesor;
-use App\Models\Reserva;
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ReservasSeeder extends Seeder
+class FechasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,7 +15,8 @@ class ReservasSeeder extends Seeder
      */
     public function run()
     {
-
-
+        for ($i=1;$i<=10;$i++){
+            Fecha::factory(1)->create();
+        }
     }
 }

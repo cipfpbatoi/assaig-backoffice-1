@@ -18,7 +18,8 @@ class ProfesorFactory extends Factory
     {
         return [
             'nombre'=> fake()->name(),
-            'tipo' => fake()->randomElement( array ('sala','cocina')),
+
+             'tipo' => fake()->randomElement(['cocina', 'sala'])
         ];
     }
 }
