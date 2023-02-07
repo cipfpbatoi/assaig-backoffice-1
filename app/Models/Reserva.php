@@ -12,4 +12,9 @@ class Reserva extends Model
     {
         return $this->belongsTo(Fecha::class, 'fecha_id');
     }
+
+    public function alergeno_reservas()
+    {
+        return $this->hasMany(Alergeno_Reserva::class);
+    }
 }
