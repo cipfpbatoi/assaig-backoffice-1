@@ -17,7 +17,14 @@ class ReservaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre'=> fake()->name(),
+            'email'=> fake()->unique()->safeEmail(),
+            'telefono'=> fake()->phoneNumber(),
+            'comensales'=> fake()->unique()->numberBetween(5,7),
+            'obervaciones' => fake()->sentence(2),
+            'localizador' => fake()->lexify('???'),
+            'confirmado' => fake()->boolean(),
+
         ];
     }
 }
