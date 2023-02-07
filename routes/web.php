@@ -23,3 +23,4 @@ Route::get('/login', function () {
 });
 
 Route::get('reserva', 'ReservaController')->name('reserva');
+Route::get('profesor', 'ProfesorController')->name('profesor');

@@ -14,7 +14,8 @@ class ProfesorController extends Controller
      */
     public function index()
     {
-        //
+        $profesor = Profesor::paginate(10);
+        return view('profesor.index', compact('profesor'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ProfesorController extends Controller
      */
     public function create()
     {
-        //
+        return view('profesor.store');
     }
 
     /**
@@ -35,7 +36,9 @@ class ProfesorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $profesor = new Profesor();
+        $profesor->nombre = $request->nombre;
+        $profesor->tipo = $request->tipo;
     }
 
     /**
@@ -46,7 +49,8 @@ class ProfesorController extends Controller
      */
     public function show(Profesor $profesor)
     {
-        //
+        $profesorToFind = Profesor::findOrFail($profesor->id);
+        return view('reserva.show', 'profesorToFind');
     }
 
     /**
@@ -57,7 +61,8 @@ class ProfesorController extends Controller
      */
     public function edit(Profesor $profesor)
     {
-        //
+        $profesorToEdit = Profesor::findOrFail($profesor->id);
+        return view('reserva.edit', compact($profesorToEdit));
     }
 
     /**
@@ -69,7 +74,9 @@ class ProfesorController extends Controller
      */
     public function update(Request $request, Profesor $profesor)
     {
-        //
+        $profesorToEdit = Profesor::find($profesor->id);
+        $profesorToEdit->nombre = $request->nombre;
+        $profesorToEdit->tipo = $request->tipo;
     }
 
     /**
@@ -80,6 +87,8 @@ class ProfesorController extends Controller
      */
     public function destroy(Profesor $profesor)
     {
-        //
+        $profesorToDelete = Profesor::find($profesor->id);
+        $profesorToDelete->delete();
+        $this->index();
     }
 }
