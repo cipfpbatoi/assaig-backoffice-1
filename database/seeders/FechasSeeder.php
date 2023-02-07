@@ -15,6 +15,8 @@ class FechasSeeder extends Seeder
      */
     public function run()
     {
-        Fecha::factory(10)->create();
+        for ($i=1;$i<=10;$i++){
+            Fecha::factory(1)->create();
+        }
     }
 }
