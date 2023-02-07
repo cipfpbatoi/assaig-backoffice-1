@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Profesor;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ReservasSeeder extends Seeder
+class ProfesoresSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +15,6 @@ class ReservasSeeder extends Seeder
      */
     public function run()
     {
-
+        Profesor::factory(10)->create();
     }
 }
