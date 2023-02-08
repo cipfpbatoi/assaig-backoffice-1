@@ -20,11 +20,12 @@ class FechaController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        $dates = Fecha::paginate(10);
+        return view('fechas.index', compact('dates'));
     }
 
     /**
@@ -35,7 +36,17 @@ class FechaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date = new Fecha();
+        $date->fecha = $request->fecha;
+        $date->pax = $request->pax;
+        $date->overbooking = $request->overbooking;
+        $date->pax_espera = $request->pax_espera;
+        $date->horario_apertura = $request->horario_apertura;
+        $date->horario_cierre = $request->horario_cierre;
+        $date->user_id = $request->user_id;
+
+        $date->save();
+        $this->show($date);
     }
 
     /**
@@ -46,18 +57,20 @@ class FechaController extends Controller
      */
     public function show(Fecha $fecha)
     {
-        //
+        $date = Fecha::findOrFail($fecha->id);
+        return view('fecha.show', compact('date'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Fecha  $fecha
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Fecha $fecha)
     {
-        //
+        $date = Fecha::findOrFail($fecha->id);
+        return view('fecha.show', compact('date'));
     }
 
     /**
@@ -69,7 +82,17 @@ class FechaController extends Controller
      */
     public function update(Request $request, Fecha $fecha)
     {
-        //
+        $date = Fecha::find($fecha->id);
+        $date->fecha = $request->fecha;
+        $date->pax = $request->pax;
+        $date->overbooking = $request->overbooking;
+        $date->pax_espera = $request->pax_espera;
+        $date->horario_apertura = $request->horario_apertura;
+        $date->horario_cierre = $request->horario_cierre;
+        $date->user_id = $request->user_id;
+
+        $date->save();
+        $this->show($date);
     }
 
     /**
@@ -80,6 +103,8 @@ class FechaController extends Controller
      */
     public function destroy(Fecha $fecha)
     {
-        //
+        $date = Fecha::find($fecha->id);
+        $date->delete();
+        $this->index();
     }
 }

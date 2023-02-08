@@ -34,7 +34,7 @@ class ReservaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -47,19 +47,15 @@ class ReservaController extends Controller
         $reserva->localizador = $request->localizador;
         $reserva->confirmada = $request->confirmada;
 
-        try {
-            $reserva->save();
-            return response()->json($reserva, 201);
-        }catch (QueryException $e){
-            return response()->json([$e->getMessage()], 400);
-        }
-    }
+        $reserva->save();
+        $this->show($reserva);
+}
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Reserva  $reserva
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Reserva $reserva)
     {
@@ -71,7 +67,7 @@ class ReservaController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Reserva  $reserva
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Reserva $reserva)
     {
@@ -97,8 +93,7 @@ class ReservaController extends Controller
         $reservaToEdit->localizador = $request->localizador;
         $reservaToEdit->confirmada = $request->confirmada;
         $reservaToEdit->save();
-
-        return view('reserva.show', compact('reservaToEdit'));
+        $this->show($reservaToEdit);
     }
 
     /**
