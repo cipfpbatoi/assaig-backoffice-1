@@ -14,8 +14,8 @@ class ProfesorController extends Controller
      */
     public function index()
     {
-        $profesor = Profesor::paginate(10);
-        return view('profesor.index', compact('profesor'));
+        $profesores = Profesor::paginate(10);
+        return view('profesor.index', compact('profesores'));
     }
 
     /**
