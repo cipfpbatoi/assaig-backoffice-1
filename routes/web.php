@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProfesorController;
+use \App\Http\Controllers\ReservaController;
+use \App\Http\Controllers\FechaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('profesor', [ProfesorController::class, 'index']);
+
+Route::get('reservas', [ReservaController::class, 'index']);
+
+Route::get('fecha', [FechaController::class, 'index']);

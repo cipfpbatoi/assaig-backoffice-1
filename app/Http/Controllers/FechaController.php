@@ -14,7 +14,8 @@ class FechaController extends Controller
      */
     public function index()
     {
-        //
+        $dates = Fecha::paginate(10);
+        return view('fecha.index', compact('dates'));
     }
 
     /**
@@ -24,8 +25,7 @@ class FechaController extends Controller
      */
     public function create()
     {
-        $dates = Fecha::paginate(10);
-        return view('fechas.index', compact('dates'));
+        return view('fechas.store');
     }
 
     /**
