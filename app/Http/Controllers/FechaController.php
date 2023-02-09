@@ -55,9 +55,9 @@ class FechaController extends Controller
      * @param  \App\Models\Fecha  $fecha
      * @return \Illuminate\Http\Response
      */
-    public function show(Fecha $fecha)
+    public function show($id)
     {
-        $date = Fecha::findOrFail($fecha->id);
+        $date = Fecha::findOrFail($id);
         return view('fecha.show', compact('date'));
     }
 

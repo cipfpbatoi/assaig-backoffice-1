@@ -24,3 +24,4 @@ Route::get('profesor', [ProfesorController::class, 'index']);
 Route::get('reservas', [ReservaController::class, 'index']);
 
 Route::get('fecha', [FechaController::class, 'index']);
+Route::get('fecha/show/{id}', [FechaController::class, 'show']);

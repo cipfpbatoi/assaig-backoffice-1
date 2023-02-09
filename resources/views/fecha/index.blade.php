@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-<h1>Lista de Reservas</h1>
+<h1>Lista de Fechas</h1>
 <table>
     <tr>
         <th>Fecha</th>
