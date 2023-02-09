@@ -19,9 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', function () {
+    return view('login');
+});
+
 Route::get('profesor', [ProfesorController::class, 'index']);
 
 Route::get('reservas', [ReservaController::class, 'index']);
 
 Route::get('fecha', [FechaController::class, 'index']);
 Route::get('fecha/show/{id}', [FechaController::class, 'show']);
+Route::get('fecha/create', [FechaController::class, 'create']);
+Route::get('fecha/store', [FechaController::class, 'store'])->name('fecha.store');

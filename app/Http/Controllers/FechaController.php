@@ -25,14 +25,14 @@ class FechaController extends Controller
      */
     public function create()
     {
-        return view('fechas.store');
+        return view('fecha.store');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -46,7 +46,7 @@ class FechaController extends Controller
         $date->user_id = $request->user_id;
 
         $date->save();
-        $this->show($date);
+        return redirect()->route('fecha/show/' . $date->id);
     }
 
     /**
