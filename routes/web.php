@@ -32,5 +32,5 @@ Route::get('fecha', [FechaController::class, 'index']);
 Route::get('fecha/show/{id}', [FechaController::class, 'show'])->name('fecha.show');
 Route::get('fecha/create', [FechaController::class, 'create']);
 Route::post('fecha/store', [FechaController::class, 'store'])->name('fecha.store');
-Route::get('fecha/create', [FechaController::class, 'create']);
+Route::get('fecha/edit/{id}', [FechaController::class, 'edit'])->name('fecha.edit');
 

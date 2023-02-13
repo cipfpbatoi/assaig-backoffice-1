@@ -75,9 +75,9 @@ class FechaController extends Controller
      * @param  \App\Models\Fecha  $fecha
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit(Fecha $fecha)
+    public function edit($id)
     {
-        $date = Fecha::findOrFail($fecha->id);
+        $date = Fecha::findOrFail($id);
         return view('fecha.edit', compact('date'));
     }
 
