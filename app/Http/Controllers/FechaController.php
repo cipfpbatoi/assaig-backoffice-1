@@ -53,7 +53,7 @@ class FechaController extends Controller
         //$date->user_id = $request->user_id;
 
         $date->save();
-        return redirect()->route('fecha.show', $date->id);
+        return redirect()->route('fecha.show', $date);
     }
 
     /**
@@ -62,11 +62,9 @@ class FechaController extends Controller
      * @param  \App\Models\Fecha  $fecha
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show(Fecha $fecha)
     {
-        $date = Fecha::findOrFail($id);
-
-        return view('fecha.show', compact('date'));
+        return view('fecha.show', compact('fecha'));
     }
 
     /**
@@ -75,10 +73,9 @@ class FechaController extends Controller
      * @param  \App\Models\Fecha  $fecha
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(Fecha $fecha)
     {
-        $date = Fecha::findOrFail($id);
-        return view('fecha.edit', compact('date'));
+        return view('fecha.edit', compact('fecha'));
     }
 
     /**
@@ -86,7 +83,7 @@ class FechaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Fecha  $fecha
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Fecha $fecha)
     {
@@ -97,10 +94,12 @@ class FechaController extends Controller
         $date->pax_espera = $request->pax_espera;
         $date->horario_apertura = $request->horario_apertura;
         $date->horario_cierre = $request->horario_cierre;
-        $date->user_id = $request->user_id;
+
+        $date->user_id = 1;
+        //$date->user_id = $request->user_id;
 
         $date->save();
-        $this->show($date);
+        return redirect()->route('fecha.show', $date);
     }
 
     /**
