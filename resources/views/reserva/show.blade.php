@@ -26,10 +26,18 @@
 <p>Observaciones: {{$reserva->observaciones}}</p>
 <p>Localizador: {{$reserva->localizador}}</p>
 
+<p>Listado Alergenos</p>
+<ul>
+    @foreach($reserva->alergeno_reservas ?? [] as $alergeno)
+        <li>{{ $alergeno->alergeno->nombre }}</li>
+    @endforeach
+</ul>
+
+
 @if($reserva->confirmado)
     <p>La reserva esta confirmada</p>
 @else
-    <p>La reserva no esta conformada aun</p>
+    <p>No esta conformada aun la reserva</p>
 @endif
 </body>
 </html>
