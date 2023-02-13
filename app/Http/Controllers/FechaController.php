@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fecha;
+use App\Models\Profesor;
+use App\Models\Profesor_fecha_cocina;
+use App\Models\Profesor_fecha_sala;
 use Illuminate\Http\Request;
 
 class FechaController extends Controller
@@ -53,11 +56,12 @@ class FechaController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Fecha  $fecha
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show($id)
     {
         $date = Fecha::findOrFail($id);
+
         return view('fecha.show', compact('date'));
     }
 

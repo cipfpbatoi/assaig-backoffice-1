@@ -28,4 +28,14 @@ class Fecha extends Model
     {
         return $this->hasMany(Fecha::class);
     }
+
+    public function profesor_fecha_cocinas2()
+    {
+        return $this->belongsToMany(Profesor::class,'profesor_fecha_cocinas');
+    }
+
+    public function profesor_fecha_sala2()
+    {
+        return $this->belongsToMany(Profesor::class,'profesor_fecha_salas');
+    }
 }

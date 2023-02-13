@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Profesor_fecha_sala extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     public function profesor()
     {

@@ -34,8 +34,10 @@
     </style>
 </head>
 <body>
+
 <form action="{{ route('login') }}">
     @csrf
+    <h3>Login del BackOffice de Assaig Restaurante de CIP FP Batoi</h3>
     <label for="email">Email:</label>
     <input type="email" id="email" name="email">
 
