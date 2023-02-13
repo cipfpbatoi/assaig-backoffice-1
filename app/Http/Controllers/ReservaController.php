@@ -59,8 +59,7 @@ class ReservaController extends Controller
      */
     public function show(Reserva $reserva)
     {
-        $reservaToFind = Reserva::findOrFail($reserva->id);
-        return view('reserva.show', compact('reservaToFind'));
+        return view('reserva.show', compact('reserva'));
     }
 
     /**

@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-<h4>Detalle de las reservas de la Fecha {{$fecha->fecha}}</h4>
+<h4>Detalle de la Fecha {{$fecha->fecha}}</h4>
 <p>Fecha: {{$fecha->fecha}}</p>
 <p>Profesores asignados Cocina</p>
 <ul>

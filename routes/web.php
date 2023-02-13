@@ -25,7 +25,5 @@ Route::get('/login', function () {
 
 Route::get('profesor', [ProfesorController::class, 'index']);
 
-Route::get('reservas', [ReservaController::class, 'index']);
-
 Route::resource('fecha', FechaController::class);
-
+Route::resource('reserva', ReservaController::class);
