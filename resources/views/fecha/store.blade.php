@@ -29,16 +29,6 @@
     </div>
 
     <div class="form-group">
-        <label for="pax">Pax</label>
-        <input type="number" name="pax" id="pax" class="form-control" value="{{ old('pax') ?? ''}}">
-        @if ($errors->has('pax'))
-            <div class="text-danger">
-                {{ $errors->first('pax') }}
-            </div>
-        @endif
-    </div>
-
-    <div class="form-group">
         <label for="overbooking">Overbooking</label>
         <input type="number" name="overbooking" id="overbooking" class="form-control" value="{{ old('overbooking') ?? ''}}">
         @if ($errors->has('overbooking'))

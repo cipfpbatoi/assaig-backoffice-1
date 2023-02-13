@@ -27,7 +27,10 @@ Route::get('profesor', [ProfesorController::class, 'index']);
 
 Route::get('reservas', [ReservaController::class, 'index']);
 
+
 Route::get('fecha', [FechaController::class, 'index']);
-Route::get('fecha/show/{id}', [FechaController::class, 'show']);
+Route::get('fecha/show/{id}', [FechaController::class, 'show'])->name('fecha.show');
 Route::get('fecha/create', [FechaController::class, 'create']);
-Route::get('fecha/store', [FechaController::class, 'store'])->name('fecha.store');
+Route::post('fecha/store', [FechaController::class, 'store'])->name('fecha.store');
+Route::get('fecha/create', [FechaController::class, 'create']);
+

@@ -7,6 +7,7 @@ use App\Models\Profesor;
 use App\Models\Profesor_fecha_cocina;
 use App\Models\Profesor_fecha_sala;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class FechaController extends Controller
 {
@@ -46,10 +47,13 @@ class FechaController extends Controller
         $date->pax_espera = $request->pax_espera;
         $date->horario_apertura = $request->horario_apertura;
         $date->horario_cierre = $request->horario_cierre;
-        $date->user_id = $request->user_id;
+
+        //CAMBIAR ES PARA PRUEBAS
+        $date->user_id = 1;
+        //$date->user_id = $request->user_id;
 
         $date->save();
-        return redirect()->route('fecha/show/' . $date->id);
+        return redirect()->route('fecha.show', $date->id);
     }
 
     /**
@@ -74,7 +78,7 @@ class FechaController extends Controller
     public function edit(Fecha $fecha)
     {
         $date = Fecha::findOrFail($fecha->id);
-        return view('fecha.show', compact('date'));
+        return view('fecha.edit', compact('date'));
     }
 
     /**
