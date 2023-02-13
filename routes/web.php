@@ -28,10 +28,4 @@ Route::get('profesor', [ProfesorController::class, 'index']);
 Route::get('reservas', [ReservaController::class, 'index']);
 
 Route::resource('fecha', FechaController::class);
-/*Route::get('fecha', [FechaController::class, 'index']);
-Route::get('fecha/show/{id}', [FechaController::class, 'show'])->name('fecha.show');
-Route::get('fecha/create', [FechaController::class, 'create']);
-Route::post('fecha/store', [FechaController::class, 'store'])->name('fecha.store');
-Route::get('fecha/edit/{id}', [FechaController::class, 'edit'])->name('fecha.edit');
-Route::put('fecha/update', [FechaController::class, 'update'])->name('fecha.update');*/
 

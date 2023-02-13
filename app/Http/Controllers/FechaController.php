@@ -95,6 +95,7 @@ class FechaController extends Controller
         $date->horario_apertura = $request->horario_apertura;
         $date->horario_cierre = $request->horario_cierre;
 
+        //CAMBIAR ES PARA PRUEBAS
         $date->user_id = 1;
         //$date->user_id = $request->user_id;
 
@@ -106,12 +107,11 @@ class FechaController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Fecha  $fecha
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Fecha $fecha)
     {
-        $date = Fecha::find($fecha->id);
-        $date->delete();
-        $this->index();
+        $fecha->delete();
+        return redirect()->route('fecha');
     }
 }
