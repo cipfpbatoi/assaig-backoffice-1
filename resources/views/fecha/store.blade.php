@@ -9,7 +9,7 @@
 <body>
 @include('layout.navegation')
 <div class="container">
-    <h4>Nueva Fecha</h4>
+    <h4 class="text-uppercase font-weight-bold">Nueva Fecha</h4>
     <form action="{{ route('fecha.store') }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
         @csrf
         <div class="form-group">

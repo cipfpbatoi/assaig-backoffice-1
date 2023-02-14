@@ -9,7 +9,7 @@
 <body>
 @include('layout.navegation')
 <div class="container">
-    <h4>Detalle de la Fecha {{$fecha->fecha}}</h4>
+    <h4 class="text-uppercase font-weight-bold">Detalle de la Fecha {{$fecha->fecha}}</h4>
     <div class="border border-primary rounded shadow-lg p-3">
         <p><strong>Fecha:</strong> {{$fecha->fecha}}</p>
         <p><strong>Profesores asignados Cocina:</strong></p>

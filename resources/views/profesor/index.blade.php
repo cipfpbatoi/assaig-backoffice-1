@@ -8,7 +8,7 @@
 </head>
 <body>
 @include('layout.navegation')
-<h1>Lista de profesores</h1>
+<h1 class="text-uppercase font-weight-bold">Lista de profesores</h1>
 <div class="container">
     <table class="rounded shadow-lg table m-2 table-striped table-hover table-bordered text-center">
         <tr class="table-primary">
