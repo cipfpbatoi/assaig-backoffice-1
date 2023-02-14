@@ -10,7 +10,7 @@
 @include('layout.navegation')
 <div class="container w-50 mt-5">
     <h4>Editar Profesor</h4>
-    <form action="{{ route('profesor.update', $profesor->id) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
+    <form action="{{ route('profesor.update', $profesor) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
         @csrf
         @method('put')
         <div class="form-group">
@@ -27,18 +27,18 @@
             <label for="tipo">Tipo</label>
             <select name="tipo" id="tipo">
                 @if ($profesor->tipo === 'sala')
-                    <option value="Sala" selected>Sala</option>
-                    <option value="Cocina">Cocina</option>
+                    <option value="sala" selected>Sala</option>
+                    <option value="cocina">Cocina</option>
                 @else
-                    <option value="Sala">Sala</option>
-                    <option value="Cocina" selected>Cocina</option>
+                    <option value="sala">Sala</option>
+                    <option value="cocina" selected>Cocina</option>
                 @endif
             </select>
         </div>
 
 
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">Añadir Profesor</button>
+            <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">Editar Profesor</button>
         </div>
     </form>
 </div>
