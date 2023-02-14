@@ -27,7 +27,7 @@ class ReservaController extends Controller
      */
     public function create()
     {
-        return view('reservas.store');
+        return view('reserva.store');
     }
 
     /**
@@ -59,8 +59,7 @@ class ReservaController extends Controller
      */
     public function show(Reserva $reserva)
     {
-        $reservaToFind = Reserva::findOrFail($reserva->id);
-        return view('reserva.show', compact('reservaToFind'));
+        return view('reserva.show', compact('reserva'));
     }
 
     /**
@@ -80,20 +79,14 @@ class ReservaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Reserva  $reserva
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Reserva $reserva)
     {
-        $reservaToEdit = Reserva::find($reserva->id);
-        $reservaToEdit->nombre = $request->nombre;
-        $reservaToEdit->email = $request->email;
-        $reservaToEdit->telefono = $request->telefono;
-        $reservaToEdit->comensales = $request->comensales;
-        $reservaToEdit->observaciones = $request->observaciones;
-        $reservaToEdit->localizador = $request->localizador;
-        $reservaToEdit->confirmada = $request->confirmada;
-        $reservaToEdit->save();
-        $this->show($reservaToEdit);
+        //Request no seria necesaria?
+        $reserva->confirmada = true;
+        $reserva->save();
+        return redirect()->route('reserva.index');
     }
 
     /**

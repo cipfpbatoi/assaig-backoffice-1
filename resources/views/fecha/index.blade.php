@@ -2,42 +2,53 @@
 <html>
 <head>
     <title>Lista de Fechas</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: lightgray;
-        }
-    </style>
+    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
 </head>
 <body>
+@include('layout.navegation')
 <h1>Lista de Fechas</h1>
-<table>
-    <tr>
-        <th>Fecha</th>
-        <th>Pax</th>
-        <th>Overbooking</th>
-        <th>pax_espera</th>
-        <th>horario_apertura</th>
-        <th>horario_cierre	</th>
-    </tr>
-    @foreach($dates as $date)
-        <tr>
-            <td>{{$date->fecha}}</td>
-            <td>{{$date->pax}}</td>
-            <td>{{$date->overbooking}}</td>
-            <td>{{$date->pax_espera}}</td>
-            <td>{{$date->horario_apertura}}</td>
-            <td>{{$date->horario_cierre}}</td>
+<div class="container">
+    <table class="rounded table m-2 table-striped table-hover table-bordered text-center shadow-lg">
+        <tr class="table-primary">
+            <th scope="col">Fecha</th>
+            <th scope="col">Pax</th>
+            <th scope="col">Overbooking</th>
+            <th scope="col">pax_espera</th>
+            <th scope="col">horario_apertura</th>
+            <th scope="col">horario_cierre	</th>
+            <th scope="col">Accion	</th>
         </tr>
-    @endforeach
-</table>
+        <tbody>
+        @foreach($dates as $date)
+            <tr>
+                <td>{{$date->fecha}}</td>
+                <td>{{$date->pax}}</td>
+                <td>{{$date->overbooking}}</td>
+                <td>{{$date->pax_espera}}</td>
+                <td>{{$date->horario_apertura}}</td>
+                <td>{{$date->horario_cierre}}</td>
+                <td>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('fecha.show', $date->id) }}">Ver Mas</a>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('fecha.edit', $date->id) }}">Editar</a>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <a class="btn btn-primary text-center mb-3" href="{{ route('fecha.create') }}">Añadir Fecha</a>
+    <div class="paginator d-flex justify-content-center my-3">
+        @if(!$dates->onFirstPage())
+            <a href="{{ $dates->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
+        @endif
+        <span class="current-page mx-5">Pagina {{$dates->currentPage()}} de {{$dates->lastPage()}}</span>
+
+        @if($dates->hasMorePages())
+            <a href="{{ $dates->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
+        @endif
+    </div>
+</div>
+
 </body>
 </html>
