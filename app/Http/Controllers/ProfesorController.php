@@ -32,7 +32,7 @@ class ProfesorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -40,7 +40,7 @@ class ProfesorController extends Controller
         $profesor->nombre = $request->nombre;
         $profesor->tipo = $request->tipo;
         $profesor->save();
-        $this->index();
+        return redirect()->route('profesor.index');
     }
 
     /**
@@ -59,12 +59,11 @@ class ProfesorController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Profesor  $profesor
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Profesor $profesor)
     {
-        $profesorToEdit = Profesor::findOrFail($profesor->id);
-        return view('reserva.edit', compact($profesorToEdit));
+        return view('profesor.edit', compact('profesor'));
     }
 
     /**
@@ -72,13 +71,14 @@ class ProfesorController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Profesor  $profesor
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Profesor $profesor)
     {
         $profesorToEdit = Profesor::find($profesor->id);
         $profesorToEdit->nombre = $request->nombre;
         $profesorToEdit->tipo = $request->tipo;
+        return redirect()->route('profesor.index');
     }
 
     /**

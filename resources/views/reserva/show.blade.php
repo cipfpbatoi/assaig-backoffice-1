@@ -18,6 +18,7 @@
     </style>
 </head>
 <body>
+@include('layout.navegation')
 <h4>Detalle de las Reservas </h4>
 <p>Nombre: {{$reserva->nombre}}</p>
 <p>Email: {{$reserva->email}}</p>

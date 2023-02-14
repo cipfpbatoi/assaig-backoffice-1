@@ -23,7 +23,6 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('profesor', [ProfesorController::class, 'index']);
-
+Route::resource('profesor', ProfesorController::class);
 Route::resource('fecha', FechaController::class);
 Route::resource('reserva', ReservaController::class);
