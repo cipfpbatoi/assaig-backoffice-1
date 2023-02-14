@@ -75,9 +75,9 @@ class ProfesorController extends Controller
      */
     public function update(Request $request, Profesor $profesor)
     {
-        $profesorToEdit = Profesor::find($profesor->id);
-        $profesorToEdit->nombre = $request->nombre;
-        $profesorToEdit->tipo = $request->tipo;
+        $profesor->nombre = $request->nombre;
+        $profesor->tipo = $request->tipo;
+        $profesor->save();
         return redirect()->route('profesor.index');
     }
 

@@ -8,7 +8,7 @@
 </head>
 <body>
 @include('layout.navegation')
-<h1>Lista de Fechas</h1>
+<h1 class="text-uppercase font-weight-bold">Lista de Fechas</h1>
 <div class="container">
     <table class="rounded table m-2 table-striped table-hover table-bordered text-center shadow-lg">
         <tr class="table-primary">

@@ -8,7 +8,7 @@
 </head>
 <body>
 @include('layout.navegation')
-<h1>Lista de Reservas</h1>
+<h1 class="text-uppercase font-weight-bold">Lista de Reservas</h1>
 <div class="container">
     <table class="rounded shadow-lg table m-2 table-striped table-hover table-bordered text-center">
         <tr class="table-primary">
@@ -35,11 +35,13 @@
                     <td>Pendiente</td>
                 @endif
                 <td>
-                    <form action="{{route('reserva.update',  $reserva->id)}}" method="POST" class="justify-content-center" enctype="multipart/form-data">
+                    <form action="{{route('reserva.update',  $reserva->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="btn btn-primary text-center">Editar</button>
                     </form>
+
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('reserva.show', $reserva->id) }}">Ver Mas</a>
                 </td>
             </tr>
         @endforeach

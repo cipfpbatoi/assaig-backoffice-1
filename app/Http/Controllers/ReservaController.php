@@ -83,8 +83,11 @@ class ReservaController extends Controller
      */
     public function update(Request $request, Reserva $reserva)
     {
-        //Request no seria necesaria?
-        $reserva->confirmada = true;
+        if(!$reserva->confirmada){
+            $reserva->confirmada = true;
+        }else{
+            $reserva->confirmada = false;
+        }
         $reserva->save();
         return redirect()->route('reserva.index');
     }
