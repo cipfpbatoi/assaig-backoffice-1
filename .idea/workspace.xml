@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c17c6e9-0b84-4609-adce-50f64c44c340" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/profesor/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profesor/store.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReservaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReservaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/fecha/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fecha/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/fecha/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fecha/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/fecha/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fecha/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/fecha/store.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fecha/store.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/profesor/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profesor/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reserva/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserva/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reserva/store.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserva/store.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
-    </list>
+    <list default="true" id="1c17c6e9-0b84-4609-adce-50f64c44c340" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -188,6 +175,7 @@
       <workItem from="1675951299294" duration="1893000" />
       <workItem from="1675953427207" duration="7973000" />
       <workItem from="1676277053299" duration="3567000" />
+      <workItem from="1676360087216" duration="6727000" />
     </task>
     <servers />
   </component>
@@ -199,7 +187,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/fecha/index.blade.php</url>
-          <line>10</line>
+          <line>11</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

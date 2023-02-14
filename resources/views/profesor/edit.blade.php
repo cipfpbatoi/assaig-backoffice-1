@@ -26,8 +26,6 @@
         <div class="form-group mt-2">
             <label for="tipo">Tipo</label>
             <select name="tipo" id="tipo">
-                <option value="Sala">Sala</option>
-                <option value="Cocina">Cocina</option>
                 @if ($profesor->tipo === 'sala')
                     <option value="Sala" selected>Sala</option>
                     <option value="Cocina">Cocina</option>
