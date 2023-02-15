@@ -26,7 +26,7 @@
         </ul>
 
 
-        @if($reserva->confirmado)
+        @if($reserva->confirmada)
             <p>La reserva esta confirmada</p>
         @else
             <p>No esta conformada aun la reserva</p>

@@ -16,7 +16,7 @@
             <th>Tipo</th>
             <th>Acción</th>
         </tr>
-        @foreach($profesores as $profesor)
+        @foreach($datosPaginados as $profesor)
             <tr>
                 <td>{{$profesor->nombre}}</td>
                 <td>{{$profesor->tipo}}</td>
@@ -29,13 +29,13 @@
     </table>
     <a class="btn btn-primary text-center mb-3" href="{{ route('profesor.create') }}">Añadir Profesor</a>
     <div class="paginator d-flex justify-content-center my-3">
-        @if(!$profesores->onFirstPage())
-            <a href="{{ $profesores->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
+        @if(!$datosPaginados->onFirstPage())
+            <a href="{{ $datosPaginados->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
         @endif
-        <span class="current-page mx-5">Pagina {{$profesores->currentPage()}} de {{$profesores->lastPage()}}</span>
+        <span class="current-page mx-5">Pagina {{$datosPaginados->currentPage()}} de {{$datosPaginados->lastPage()}}</span>
 
-        @if($profesores->hasMorePages())
-            <a href="{{ $profesores->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
+        @if($datosPaginados->hasMorePages())
+            <a href="{{ $datosPaginados->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
         @endif
     </div>
 </div>

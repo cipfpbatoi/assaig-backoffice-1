@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\HttpClient;
 use App\Models\Suscriptor;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SuscriptorController extends Controller
 {
@@ -12,9 +14,23 @@ class SuscriptorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(HttpClient $httpClient)
     {
-        //
+        /*
+        $datos = $httpClient->get('http://assaig.api/api/suscriptors', [
+            'Accept' => 'application/json',
+        ]);
+        $datos = json_decode($datos)->data;
+
+        $perPage = 10;
+        $page = request()->input('page', 1);
+        $offset = ($page * $perPage) - $perPage;
+        $data = array_slice($datos, $offset, $perPage);
+
+        $datosPaginados = new LengthAwarePaginator($data, count($datos), $perPage, $page);
+
+        return view('profesor.index', compact('datosPaginados'));
+        */
     }
 
     /**

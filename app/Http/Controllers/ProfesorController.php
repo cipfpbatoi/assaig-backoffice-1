@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\HttpClient;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProfesorController extends Controller
 {
@@ -12,10 +14,21 @@ class ProfesorController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(HttpClient $httpClient)
     {
-        $profesores = Profesor::paginate(10);
-        return view('profesor.index', compact('profesores'));
+        $datos = $httpClient->get('http://assaig.api/api/profesores', [
+            'Accept' => 'application/json',
+        ]);
+        $datos = json_decode($datos)->data;
+
+        $perPage = 10;
+        $page = request()->input('page', 1);
+        $offset = ($page * $perPage) - $perPage;
+        $data = array_slice($datos, $offset, $perPage);
+
+        $datosPaginados = new LengthAwarePaginator($data, count($datos), $perPage, $page);
+
+        return view('profesor.index', compact('datosPaginados'));
     }
 
     /**

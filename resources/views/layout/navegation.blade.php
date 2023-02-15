@@ -6,13 +6,13 @@
                 <ul class="nav navbar-nav">
 
                     <li>
-                        <a href="{{route('fecha.index')}}" class="m-2 text-white text-decoration-none">Lista Fechas</a>
+                        <a href="{{route('fechas.index')}}" class="m-2 text-white text-decoration-none">Lista Fechas</a>
                     </li>
                     <li>
-                        <a href="{{route('reserva.index')}}" class="m-2 text-white text-decoration-none">Lista de Reservas</a>
+                        <a href="{{route('reservas.index')}}" class="m-2 text-white text-decoration-none">Lista de Reservas</a>
                     </li>
                     <li>
-                        <a href="{{route('profesor.index')}}" class="m-2 text-white text-decoration-none">Lista de Profesores</a>
+                        <a href="{{route('profesores.index')}}" class="m-2 text-white text-decoration-none">Lista de Profesores</a>
                     </li>
                 </ul>
             </div>
