@@ -10,7 +10,7 @@
 @include('layout.navegation')
 <div class="container">
     <h4 class="text-uppercase font-weight-bold">Editado de la Fecha {{ $fecha->fecha }}</h4>
-    <form action="{{ route('fecha.update', $fecha->id) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
+    <form action="{{ route('fechas.update', $fecha->id) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
         @csrf
         @method('put')
         <div class="form-group">

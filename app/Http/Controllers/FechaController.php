@@ -76,8 +76,12 @@ class FechaController extends Controller
      * @param  \App\Models\Fecha  $fecha
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(Fecha $fecha)
+    public function show(HttpClient $httpClient, Fecha $fecha)
     {
+        $fecha = $httpClient->get('http://assaig.api/api/fechas/' . $fecha->id, [
+            'Accept' => 'application/json',
+        ]);
+        $fecha = json_decode($fecha)->data;
         return view('fecha.show', compact('fecha'));
     }
 

@@ -30,14 +30,14 @@
                 <td>{{$date->horario_apertura}}</td>
                 <td>{{$date->horario_cierre}}</td>
                 <td>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('fecha.show', $date->id) }}">Ver Mas</a>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('fecha.edit', $date->id) }}">Editar</a>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.show', $date->id) }}">Ver Mas</a>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.edit', $date->id) }}">Editar</a>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    <a class="btn btn-primary text-center mb-3" href="{{ route('fecha.create') }}">Añadir Fecha</a>
+    <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.create') }}">Añadir Fecha</a>
     <div class="paginator d-flex justify-content-center my-3">
         @if(!$datesPaginadas->onFirstPage())
             <a href="{{ $datesPaginadas->previousPageUrl() }}" class="btn btn-primary">Anterior</a>

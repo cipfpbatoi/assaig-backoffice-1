@@ -38,7 +38,7 @@
                     <form action="{{route('reservas.update',  $reserva->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="btn btn-primary text-center">Editar</button>
+                        <button type="submit" class="btn btn-primary text-center">Confirmar</button>
                     </form>
 
                     <a class="btn btn-primary text-center mb-3" href="{{ route('reservas.show', $reserva->id) }}">Ver Mas</a>

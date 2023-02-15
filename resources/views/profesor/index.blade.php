@@ -21,13 +21,13 @@
                 <td>{{$profesor->nombre}}</td>
                 <td>{{$profesor->tipo}}</td>
                 <td>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesor.edit', $profesor->id) }}">Editar</a>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.edit', $profesor->id) }}">Editar</a>
                 </td>
             </tr>
         @endforeach
 
     </table>
-    <a class="btn btn-primary text-center mb-3" href="{{ route('profesor.create') }}">Añadir Profesor</a>
+    <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.create') }}">Añadir Profesor</a>
     <div class="paginator d-flex justify-content-center my-3">
         @if(!$datosPaginados->onFirstPage())
             <a href="{{ $datosPaginados->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
