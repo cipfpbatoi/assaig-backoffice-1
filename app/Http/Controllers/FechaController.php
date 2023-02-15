@@ -8,6 +8,8 @@ use App\Models\Profesor_fecha_cocina;
 use App\Models\Profesor_fecha_sala;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use App\Http\HttpClient;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class FechaController extends Controller
 {
@@ -16,10 +18,22 @@ class FechaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(HttpClient $httpClient)
     {
-        $dates = Fecha::paginate(10);
-        return view('fecha.index', compact('dates'));
+        $dates = $httpClient->get('http://assaig.api/api/fechas', [
+            'Accept' => 'application/json',
+        ]);
+        $dates = json_decode($dates)->data;
+
+        $perPage = 10;
+        $page = request()->input('page', 1);
+        $offset = ($page * $perPage) - $perPage;
+        $data = array_slice($dates, $offset, $perPage);
+
+        $datesPaginadas = new LengthAwarePaginator($data, count($dates), $perPage, $page);
+
+        //$dates = Fecha::paginate(10);
+        return view('fecha.index', compact('datesPaginadas'));
     }
 
     /**

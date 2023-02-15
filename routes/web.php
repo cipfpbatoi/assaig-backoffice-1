@@ -23,6 +23,7 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::resource('profesor', ProfesorController::class);
-Route::resource('fecha', FechaController::class);
-Route::resource('reserva', ReservaController::class);
+Route::resource('profesores', ProfesorController::class);
+Route::resource('fechas', FechaController::class);
+Route::resource('reservas', ReservaController::class);
+

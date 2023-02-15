@@ -21,7 +21,7 @@
             <th>Confirmada</th>
             <th>Acción</th>
         </tr>
-        @foreach($reservas as $reserva)
+        @foreach($reservasPaginadas as $reserva)
             <tr>
                 <td>{{$reserva->nombre}}</td>
                 <td>{{$reserva->email}}</td>
@@ -35,25 +35,25 @@
                     <td>Pendiente</td>
                 @endif
                 <td>
-                    <form action="{{route('reserva.update',  $reserva->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
+                    <form action="{{route('reservas.update',  $reserva->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="btn btn-primary text-center">Editar</button>
                     </form>
 
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('reserva.show', $reserva->id) }}">Ver Mas</a>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('reservas.show', $reserva->id) }}">Ver Mas</a>
                 </td>
             </tr>
         @endforeach
     </table>
     <div class="paginator d-flex justify-content-center my-3">
-        @if(!$reservas->onFirstPage())
-            <a href="{{ $reservas->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
+        @if(!$reservasPaginadas->onFirstPage())
+            <a href="/reservas{{ $reservasPaginadas->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
         @endif
-        <span class="current-page mx-5">Pagina {{$reservas->currentPage()}} de {{$reservas->lastPage()}}</span>
+        <span class="current-page mx-5">Pagina {{$reservasPaginadas->currentPage()}} de {{$reservasPaginadas->lastPage()}}</span>
 
-        @if($reservas->hasMorePages())
-            <a href="{{ $reservas->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
+        @if($reservasPaginadas->hasMorePages())
+            <a href="/reservas{{ $reservasPaginadas->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
         @endif
     </div>
 </div>

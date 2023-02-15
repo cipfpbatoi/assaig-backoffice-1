@@ -21,7 +21,7 @@
             <th scope="col">Accion	</th>
         </tr>
         <tbody>
-        @foreach($dates as $date)
+        @foreach($datesPaginadas as $date)
             <tr>
                 <td>{{$date->fecha}}</td>
                 <td>{{$date->pax}}</td>
@@ -39,13 +39,13 @@
     </table>
     <a class="btn btn-primary text-center mb-3" href="{{ route('fecha.create') }}">Añadir Fecha</a>
     <div class="paginator d-flex justify-content-center my-3">
-        @if(!$dates->onFirstPage())
-            <a href="{{ $dates->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
+        @if(!$datesPaginadas->onFirstPage())
+            <a href="{{ $datesPaginadas->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
         @endif
-        <span class="current-page mx-5">Pagina {{$dates->currentPage()}} de {{$dates->lastPage()}}</span>
+        <span class="current-page mx-5">Pagina {{$datesPaginadas->currentPage()}} de {{$datesPaginadas->lastPage()}}</span>
 
-        @if($dates->hasMorePages())
-            <a href="{{ $dates->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
+        @if($datesPaginadas->hasMorePages())
+            <a href="{{ $datesPaginadas->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
         @endif
     </div>
 </div>
