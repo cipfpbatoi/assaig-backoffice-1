@@ -150,6 +150,5 @@ class ReservaController extends Controller
         $fecha = $reservasPaginadas[0]->fecha;
         $titulo = 'Reservas para el día ' . $fecha->fecha;
         return view('reserva.index', compact('reservasPaginadas', 'titulo'));
-
     }
 }

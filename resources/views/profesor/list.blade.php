@@ -8,7 +8,7 @@
 </head>
 <body>
 @include('layout.navegation')
-<h1 class="text-uppercase font-weight-bold">Lista de Fechas</h1>
+<h1 class="text-uppercase font-weight-bold">Lista de las Fechas de {{ $profesor }}</h1>
 <div class="container">
     <table class="rounded table m-2 table-striped table-hover table-bordered text-center shadow-lg">
         <tr class="table-primary">
@@ -22,7 +22,7 @@
             <th scope="col">Accion</th>
         </tr>
         <tbody>
-        @foreach($datesPaginadas as $date)
+        @foreach($fechasPaginados as $date)
             <tr>
                 <td>{{$date->fecha}}</td>
                 <td>{{$date->pax}}</td>
@@ -33,7 +33,7 @@
 
                 <td>
                     <a class="btn btn-primary text-center mb-3" href="{{ route('reservas.reservasFecha', $date->id) }}">Ver Reservas</a>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.show', $date->id) }}">Ver Profesores</a>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.show', $date->id) }}">Ver Mas</a>
                 </td>
 
                 <td>
@@ -50,13 +50,13 @@
     </table>
     <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.create') }}">Añadir Fecha</a>
     <div class="paginator d-flex justify-content-center my-3">
-        @if(!$datesPaginadas->onFirstPage())
-            <a href="{{ $datesPaginadas->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
+        @if(!$fechasPaginados->onFirstPage())
+            <a href="{{ $fechasPaginados->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
         @endif
-        <span class="current-page mx-5">Pagina {{$datesPaginadas->currentPage()}} de {{$datesPaginadas->lastPage()}}</span>
+        <span class="current-page mx-5">Pagina {{$fechasPaginados->currentPage()}} de {{$fechasPaginados->lastPage()}}</span>
 
-        @if($datesPaginadas->hasMorePages())
-            <a href="{{ $datesPaginadas->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
+        @if($fechasPaginados->hasMorePages())
+            <a href="{{ $fechasPaginados->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
         @endif
     </div>
 </div>

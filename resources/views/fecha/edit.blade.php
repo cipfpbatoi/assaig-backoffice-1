@@ -73,6 +73,46 @@
             @endif
         </div>
 
+        <div class="form-group">
+            <label for="horario_cierre">Profesores de Sala</label>
+            @foreach ($profesores_sala_fecha as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox" name="profesores_sala[]" value="{{ $profesor->id }}" checked>
+
+                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
+                    </label>
+                </div>
+            @endforeach
+            @foreach ($profesorSala as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox" name="profesores_sala[]" value="{{ $profesor->id }}">
+
+                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
+                    </label>
+                </div>
+            @endforeach
+            <label for="horario_cierre">Profesores de Cocina</label>
+            @foreach ($profesores_cocina_fecha as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox" name="profesores_cocina[]" value="{{ $profesor->id }}" checked>
+                        {{ $profesor->nombre }}
+                    </label>
+                </div>
+            @endforeach
+
+            @foreach ($profesorCocina as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox" name="profesores_cocina[]" value="{{ $profesor->id }}">
+                        {{ $profesor->nombre }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
+
         <input type="hidden" name="user_id" id="user_id" class="user_id" value="{{ Auth::user()->id ?? ''}}" min="0">
 
         <div class="form-group text-center">
