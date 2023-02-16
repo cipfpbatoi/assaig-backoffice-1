@@ -22,6 +22,7 @@
                 <td>{{$profesor->tipo}}</td>
                 <td>
                     <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.edit', $profesor->id) }}">Editar</a>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.destroy', $profesor->id) }}">Eliminar</a>
                 </td>
             </tr>
         @endforeach
@@ -30,12 +31,12 @@
     <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.create') }}">Añadir Profesor</a>
     <div class="paginator d-flex justify-content-center my-3">
         @if(!$datosPaginados->onFirstPage())
-            <a href="{{ $datosPaginados->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
+            <a href="/profesores{{ $datosPaginados->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
         @endif
         <span class="current-page mx-5">Pagina {{$datosPaginados->currentPage()}} de {{$datosPaginados->lastPage()}}</span>
 
         @if($datosPaginados->hasMorePages())
-            <a href="{{ $datosPaginados->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
+            <a href="/profesores{{ $datosPaginados->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
         @endif
     </div>
 </div>

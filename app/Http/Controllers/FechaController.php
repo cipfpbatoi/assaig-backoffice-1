@@ -10,13 +10,14 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use App\Http\HttpClient;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Http;
 
 class FechaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(HttpClient $httpClient)
     {
@@ -54,20 +55,25 @@ class FechaController extends Controller
      */
     public function store(Request $request)
     {
-        $date = new Fecha();
+        /*$date = new Fecha();
         $date->fecha = $request->fecha;
         $date->pax = $request->pax;
         $date->overbooking = $request->overbooking;
         $date->pax_espera = $request->pax_espera;
         $date->horario_apertura = $request->horario_apertura;
         $date->horario_cierre = $request->horario_cierre;
-
         //CAMBIAR ES PARA PRUEBAS
         $date->user_id = 1;
         //$date->user_id = $request->user_id;
-
         $date->save();
-        return redirect()->route('fecha.show', $date);
+        return redirect()->route('fecha.show', $date);*/
+
+        $response = Http::asForm()->post('http://assaig.api/api/fechas', $request);
+        if ($response->status()=== 201) {
+            return redirect()->route('fechas.index');
+        }else{
+            return redirect()->route('fechas.create');
+        }
     }
 
     /**
@@ -91,8 +97,12 @@ class FechaController extends Controller
      * @param  \App\Models\Fecha  $fecha
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit(Fecha $fecha)
+    public function edit(HttpClient $httpClient, Fecha $fecha)
     {
+        $fecha = $httpClient->get('http://assaig.api/api/fechas/' . $fecha->id, [
+            'Accept' => 'application/json',
+        ]);
+        $fecha = json_decode($fecha)->data;
         return view('fecha.edit', compact('fecha'));
     }
 
@@ -105,20 +115,25 @@ class FechaController extends Controller
      */
     public function update(Request $request, Fecha $fecha)
     {
-        $date = Fecha::find($fecha->id);
+        /*$date = Fecha::find($fecha->id);
         $date->fecha = $request->fecha;
         $date->pax = $request->pax;
         $date->overbooking = $request->overbooking;
         $date->pax_espera = $request->pax_espera;
         $date->horario_apertura = $request->horario_apertura;
         $date->horario_cierre = $request->horario_cierre;
-
         //CAMBIAR ES PARA PRUEBAS
         $date->user_id = 1;
         //$date->user_id = $request->user_id;
-
         $date->save();
-        return redirect()->route('fecha.show', $date);
+        return redirect()->route('fecha.show', $date);*/
+
+        $response = Http::asForm()->put('http://assaig.api/api/fechas/' . $fecha->id, $request);
+        if ($response->status()=== 200) {
+            return redirect()->route('fechas.index');
+        }else{
+            return redirect()->route('fechas.create');
+        }
     }
 
     /**
@@ -129,7 +144,14 @@ class FechaController extends Controller
      */
     public function destroy(Fecha $fecha)
     {
-        $fecha->delete();
-        return redirect()->route('fecha');
+        /*$fecha->delete();
+        return redirect()->route('fecha');*/
+        $response = Http::delete('http://assaig.api/api/fechas', $fecha);
+
+        if ($response->status()=== 204) {
+            return redirect()->route('fechas.index');
+        }else{
+            return redirect()->route('fechas.edit', compact('fecha'));
+        }
     }
 }

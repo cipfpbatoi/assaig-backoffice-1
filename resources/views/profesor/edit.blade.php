@@ -10,7 +10,7 @@
 @include('layout.navegation')
 <div class="container w-50 mt-5">
     <h4 class="text-uppercase font-weight-bold">Editar Profesor</h4>
-    <form action="{{ route('profesores.update', $profesor) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
+    <form action="{{ route('profesores.update', $id) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
         @csrf
         @method('put')
         <div class="form-group">
