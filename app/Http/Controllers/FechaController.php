@@ -33,7 +33,6 @@ class FechaController extends Controller
 
         $datesPaginadas = new LengthAwarePaginator($data, count($datos), $perPage, $page);
 
-        //$dates = Fecha::paginate(10);
         return view('fecha.index', compact('datesPaginadas'));
     }
 

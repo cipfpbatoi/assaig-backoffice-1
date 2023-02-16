@@ -8,7 +8,7 @@
 </head>
 <body>
 @include('layout.navegation')
-<h1 class="text-uppercase font-weight-bold">Lista de Reservas</h1>
+<h1 class="text-uppercase font-weight-bold">{{$titulo}}</h1>
 <div class="container">
     <table class="rounded shadow-lg table m-2 table-striped table-hover table-bordered text-center">
         <tr class="table-primary">
@@ -17,7 +17,7 @@
             <th>Telefono</th>
             <th>Comensales</th>
             <th>Observaciones</th>
-            <th>Localizador</th>
+            <th>Fecha</th>
             <th>Confirmada</th>
             <th>Acción</th>
         </tr>
@@ -28,19 +28,20 @@
                 <td>{{$reserva->telefono}}</td>
                 <td>{{$reserva->comensales}}</td>
                 <td>{{$reserva->observaciones}}</td>
-                <td>{{$reserva->localizador}}</td>
+                <td>{{$reserva->fecha->fecha}}</td>
                 @if($reserva->confirmada === 1)
-                    <td>Confrmada</td>
+                    <td>Confirmada</td>
                 @else
-                    <td>Pendiente</td>
+                    <td>
+                        <p>Pendiente</p>
+                        <form action="{{route('reservas.confirmar',  $reserva->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-primary text-center">Confirmar</button>
+                        </form>
+                    </td>
                 @endif
                 <td>
-                    <form action="{{route('reservas.update',  $reserva->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" class="btn btn-primary text-center">Editar</button>
-                    </form>
-
                     <a class="btn btn-primary text-center mb-3" href="{{ route('reservas.show', $reserva->id) }}">Ver Mas</a>
                 </td>
             </tr>
