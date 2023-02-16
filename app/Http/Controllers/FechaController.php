@@ -21,17 +21,17 @@ class FechaController extends Controller
      */
     public function index(HttpClient $httpClient)
     {
-        $dates = $httpClient->get('http://assaig.api/api/fechas', [
+        $datos = $httpClient->get('http://assaig.api/api/fechas', [
             'Accept' => 'application/json',
         ]);
-        $dates = json_decode($dates)->data;
+        $datos = json_decode($datos)->data;
 
         $perPage = 10;
         $page = request()->input('page', 1);
         $offset = ($page * $perPage) - $perPage;
-        $data = array_slice($dates, $offset, $perPage);
+        $data = array_slice($datos, $offset, $perPage);
 
-        $datesPaginadas = new LengthAwarePaginator($data, count($dates), $perPage, $page);
+        $datesPaginadas = new LengthAwarePaginator($data, count($datos), $perPage, $page);
 
         //$dates = Fecha::paginate(10);
         return view('fecha.index', compact('datesPaginadas'));

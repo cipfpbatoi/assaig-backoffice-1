@@ -22,7 +22,12 @@
                 <td>{{$profesor->tipo}}</td>
                 <td>
                     <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.edit', $profesor->id) }}">Editar</a>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.destroy', $profesor->id) }}">Eliminar</a>
+
+                    <form action="{{route('profesores.destroy',  $profesor->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary text-center">Borrar</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

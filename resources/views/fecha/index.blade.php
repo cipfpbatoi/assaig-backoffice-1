@@ -18,7 +18,8 @@
             <th scope="col">pax_espera</th>
             <th scope="col">horario_apertura</th>
             <th scope="col">horario_cierre	</th>
-            <th scope="col">Accion	</th>
+            <th scope="col">Info</th>
+            <th scope="col">Accion</th>
         </tr>
         <tbody>
         @foreach($datesPaginadas as $date)
@@ -29,6 +30,11 @@
                 <td>{{$date->pax_espera}}</td>
                 <td>{{$date->horario_apertura}}</td>
                 <td>{{$date->horario_cierre}}</td>
+
+                <td>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.show', $date->id) }}">Ver Reservas</a>
+                </td>
+
                 <td>
                     <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.show', $date->id) }}">Ver Mas</a>
                     <a class="btn btn-primary text-center mb-3" href="{{ route('fechas.edit', $date->id) }}">Editar</a>

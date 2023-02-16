@@ -82,7 +82,7 @@ class ProfesorController extends Controller
         ]);
         $profesor = json_decode($profesor)->data;
         //$profesorToFind = Profesor::findOrFail($profesor->id);
-        return view('reserva.show', compact('profesor'));
+        return view('profesor.show', compact('profesor'));
     }
 
     /**
