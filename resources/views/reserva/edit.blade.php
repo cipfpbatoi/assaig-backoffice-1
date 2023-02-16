@@ -12,7 +12,7 @@
     <h4 class="text-uppercase font-weight-bold">Editar Reserva</h4>
     <form action="{{ route('reservas.update', $reserva) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
         @csrf
-        @method('put')
+        @method('PUT')
         <div class="form-group">
             <label for="fecha">Fecha</label>
             <input type="date" name="fecha" id="fecha" class="form-control" value="{{ $reserva->fecha->fecha }}" required>

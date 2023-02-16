@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ReservaRequest;
+use App\Models\Fecha;
 use App\Models\Reserva;
-use http\Env\Response;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\HttpClient;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Http;
 
 class ReservaController extends Controller
 {
@@ -30,7 +29,9 @@ class ReservaController extends Controller
         $data = array_slice($reservas, $offset, $perPage);
 
         $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
-        return view('reserva.index', compact('reservasPaginadas'));
+
+        $titulo = 'Lista de Reservas';
+        return view('reserva.index', compact('reservasPaginadas', 'titulo'));
 
     }
 
@@ -52,18 +53,8 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
-        $reserva = new Reserva();
-        $reserva->nombre = $request->nombre;
-        $reserva->email = $request->email;
-        $reserva->telefono = $request->telefono;
-        $reserva->comensales = $request->comensales;
-        $reserva->observaciones = $request->observaciones;
-        $reserva->localizador = $request->localizador;
-        $reserva->confirmada = $request->confirmada;
-
-        $reserva->save();
-        $this->show($reserva);
-}
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -88,15 +79,7 @@ class ReservaController extends Controller
      */
     public function edit(HttpClient $httpClient, $id)
     {
-        $reserva = $httpClient->get('http://assaig.api/api/reservas/' . $id, [
-            'Accept' => 'application/json',
-        ]);
-        $reserva = json_decode($reserva)->data;
-        $alergenos = $httpClient->get('http://assaig.api/api/alergenos', [
-            'Accept' => 'application/json',
-        ]);
-        $alergenos = json_decode($alergenos)->data;
-        return view('reserva.edit', compact($reserva, $alergenos));
+        //
     }
 
     /**
@@ -106,25 +89,9 @@ class ReservaController extends Controller
      * @param  \App\Models\Reserva  $reserva
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(HttpClient $httpClient, ReservaRequest $request, $id)
+    public function update(HttpClient $httpClient, $id)
     {
-        $response = $httpClient->put('http://assaig.api/api/reservas/' . $id, [
-            'json' => [
-                'nombre' => $request->nombre,
-                'email' => $request->email,
-                'telefono' =>  $request->telefono,
-                'comensales' =>  $request->comensales,
-                'localizador' =>  $request->localizador,
-                'confirmada' =>  $request->confirmada ? 1 : 0,
-            ]
-        ]);
-
-        if ($response->status() == 200) {
-            return redirect()->route('reserva.index');
-        } else {
-            alert("Ocurrió un error al realizar la solicitud PUT.");
-        }
-
+        //
     }
 
     /**
@@ -135,8 +102,54 @@ class ReservaController extends Controller
      */
     public function destroy(Reserva $reserva)
     {
-        $reservaToDelete = Reserva::find($reserva->id);
-        $reservaToDelete->delete();
-        $this->index();
+        //
+    }
+
+    public function confirmar(HttpClient $httpClient, $id)
+    {
+        if ($httpClient->get('http://assaig.api/api/confirmar-reserva/' . $id)) {
+            return redirect()->route('reservas.index');
+        } else {
+            echo "Error al realizar la solicitud PUT";
+        }
+    }
+
+    public function pendientes(HttpClient $httpClient)
+    {
+        $request = $httpClient->get('http://assaig.api/api/reservas-pendientes', [
+            'Accept' => 'application/json',
+        ]);
+        $reservas = json_decode($request)->data;
+
+        $perPage = 10;
+        $page = request()->input('page', 1);
+        $offset = ($page * $perPage) - $perPage;
+        $data = array_slice($reservas, $offset, $perPage);
+
+        $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
+
+        $titulo = 'Reservas Pendientes';
+        return view('reserva.index', compact('reservasPaginadas', 'titulo'));
+
+    }
+
+    public function reservasFecha(HttpClient $httpClient, $fechaId)
+    {
+        $request = $httpClient->get('http://assaig.api/api/reservas-fecha/' . $fechaId, [
+            'Accept' => 'application/json',
+        ]);
+        $reservas = json_decode($request)->data;
+
+        $perPage = 10;
+        $page = request()->input('page', 1);
+        $offset = ($page * $perPage) - $perPage;
+        $data = array_slice($reservas, $offset, $perPage);
+
+        $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
+
+        $fecha = $reservasPaginadas[0]->fecha;
+        $titulo = 'Reservas para el día ' . $fecha->fecha;
+        return view('reserva.index', compact('reservasPaginadas', 'titulo'));
+
     }
 }
