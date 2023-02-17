@@ -10,7 +10,7 @@
 @include('layout.navegation')
 <div class="container">
     <h4 class="text-uppercase font-weight-bold">Nueva Fecha</h4>
-    <form action="{{ route('fecha.store') }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
+    <form action="{{ route('fechas.store') }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
         @csrf
         <div class="form-group">
             <label for="fecha">Fecha</label>
@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label for="pax_espera">Pax Esperada</label>
-            <input type="number" name="pax_espera" id="pax_espera" class="form-control" value="{{ old('pax_espera') ?? ''}}">
+            <input type="number" name="pax_espera" id="pax_espera" class="form-control" value="{{ old('pax_espera') ?? '0'}}">
             @if ($errors->has('pax_espera'))
                 <div class="text-danger">
                     {{ $errors->first('pax_espera') }}
@@ -72,7 +72,28 @@
             @endif
         </div>
 
-        <input type="hidden" name="user_id" id="user_id" class="user_id" value="{{ Auth::user()->id ?? ''}}" min="0">
+        <div class="form-group">
+            <label for="profesores_sala">Profesores de Sala</label>
+            @foreach ($profesoresSala as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox" name="profesores_sala[]" value="{{ $profesor->id }}">
+
+                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
+                    </label>
+                </div>
+            @endforeach
+
+            <label for="profesores_cocina">Profesores Cocina</label>
+            @foreach ($profesoresCocina as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox" name="profesores_cocina[]" value="{{ $profesor->id }}">
+                        {{ $profesor->nombre }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
 
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">Añadir Nueva Fecha</button>

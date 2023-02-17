@@ -139,17 +139,24 @@ class ReservaController extends Controller
             'Accept' => 'application/json',
         ]);
         $reservas = json_decode($request)->data;
-
         $perPage = 10;
         $page = request()->input('page', 1);
         $offset = ($page * $perPage) - $perPage;
         $data = array_slice($reservas, $offset, $perPage);
+        if (count($reservas) !== 0) {
+            $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
 
-        $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
+            $fecha = $reservasPaginadas[0]->fecha;
+            $titulo = 'Reservas para el día ' . $fecha->fecha;
 
-        $fecha = $reservasPaginadas[0]->fecha;
-        $titulo = 'Reservas para el día ' . $fecha->fecha;
+        }else{
+            $request = $httpClient->get('http://assaig.api/api/fechas/' . $fechaId, [
+                'Accept' => 'application/json',
+            ]);
+            $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
+            $fecha = json_decode($request)->data;
+            $titulo = 'Reservas para el día ' . $fecha->fecha;
+        }
         return view('reserva.index', compact('reservasPaginadas', 'titulo'));
-
     }
 }

@@ -10,7 +10,7 @@
 @include('layout.navegation')
 <div class="container w-50 mt-5">
     <h4>Nuevo Profesor</h4>
-    <form action="{{ route('profesor.store') }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
+    <form action="{{ route('profesores.store') }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
         @csrf
         <div class="form-group">
             <label for="nombre">Nombre</label>
@@ -25,8 +25,8 @@
         <div class="form-group mt-2">
             <label for="tipo">Tipo</label>
             <select name="tipo" id="tipo">
-                <option value="Sala">Sala</option>
-                <option value="Cocina">Cocina</option>
+                <option value="sala">Sala</option>
+                <option value="cocina">Cocina</option>
             </select>
         </div>
 

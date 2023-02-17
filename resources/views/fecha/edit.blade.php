@@ -10,7 +10,7 @@
 @include('layout.navegation')
 <div class="container">
     <h4 class="text-uppercase font-weight-bold">Editado de la Fecha {{ $fecha->fecha }}</h4>
-    <form action="{{ route('fecha.update', $fecha->id) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
+    <form action="{{ route('fechas.update', $fecha->id) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
         @csrf
         @method('put')
         <div class="form-group">
@@ -55,7 +55,7 @@
 
         <div class="form-group">
             <label for="horario_apertura">Horario de Apertura</label>
-            <input type="time" name="horario_apertura" id="horario_apertura" class="form-control" value="{{ $fecha->horario_apertura }}">
+            <input type="time" name="horario_apertura" id="horario_apertura" class="form-control" value="{{ $horarioApertura }}">
             @if ($errors->has('horario_apertura'))
                 <div class="text-danger">
                     {{ $errors->first('horario_apertura') }}
@@ -65,7 +65,7 @@
 
         <div class="form-group">
             <label for="horario_cierre">Horario de Cierre</label>
-            <input type="time" name="horario_cierre" id="horario_cierre" class="form-control" value="{{ $fecha->horario_cierre }}">
+            <input type="time" name="horario_cierre" id="horario_cierre" class="form-control" value="{{ $horarioCierre }}">
             @if ($errors->has('horario_cierre'))
                 <div class="text-danger">
                     {{ $errors->first('horario_cierre') }}
@@ -73,7 +73,40 @@
             @endif
         </div>
 
-        <input type="hidden" name="user_id" id="user_id" class="user_id" value="{{ Auth::user()->id ?? ''}}" min="0">
+        <div class="form-group">
+            <label for="horario_cierre">Profesores Sala</label>
+            @foreach ($profesorSala as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox"
+                               name="profesores_sala[]"
+                               value="{{ $profesor->id }}"
+                           @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
+                               checked
+                            @endif
+                        >
+                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
+                    </label>
+                </div>
+            @endforeach
+    <br>
+            <label for="horario_cierre">Profesores Cocina</label>
+            @foreach ($profesorCocina as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox"
+                               name="profesores_cocina[]"
+                               value="{{ $profesor->id }}"
+                               @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
+                                   checked
+                            @endif
+                        >
+                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
+                    </label>
+                </div>
+            @endforeach
+
+        </div>
 
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">Editar</button>

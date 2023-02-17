@@ -9,28 +9,23 @@
 <body>
 @include('layout.navegation')
 <div class="container">
-    <h4 class="text-uppercase font-weight-bold">Detalle de la Fecha {{$fecha->fecha}}</h4>
+    <h4 class="text-uppercase font-weight-bold">Profesores Asignados a la fecha {{$fecha->fecha}}</h4>
     <div class="border border-primary rounded shadow-lg p-3">
-        <p><strong>Fecha:</strong> {{$fecha->fecha}}</p>
+
         <p><strong>Profesores asignados Cocina:</strong></p>
         <ul>
-            @foreach($fecha->profesor_fecha_cocinas2 ?? [] as $profesor)
+            @foreach($fecha->profesores_cocina ?? [] as $profesor)
                 <li>{{ $profesor->nombre }}</li>
             @endforeach
         </ul>
 
         <p><strong>Profesores asignados Sala</strong></p>
         <ul>
-            @foreach($fecha->profesor_fecha_sala2 ?? [] as $profesor)
+            @foreach($fecha->profesores_sala ?? [] as $profesor)
                 <li>{{ $profesor->nombre }}</li>
             @endforeach
         </ul>
 
-        <p><strong>Numero de Comensales Maximo:</strong> {{$fecha->pax}}</p>
-        <p><strong>Overbooking: </strong>{{$fecha->overbooking}}</p>
-        <p><strong>Numero de Comensales Esperados:</strong> {{$fecha->pax_espera}}</p>
-        <p><strong>Hora de Apertura:</strong> {{$fecha->horario_apertura}}</p>
-        <p><strong>Hora de Cierre:</strong> {{$fecha->horario_cierre}}</p>
     </div>
 </div>
 </body>
