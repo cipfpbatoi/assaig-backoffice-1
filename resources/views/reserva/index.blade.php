@@ -1,62 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Reservas</title>
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-</head>
-<body>
-@include('layout.navegation')
-<h1 class="text-uppercase font-weight-bold">{{$titulo}}</h1>
-<div class="container">
-    <table class="rounded shadow-lg table m-2 table-striped table-hover table-bordered text-center">
-        <tr class="table-primary">
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Telefono</th>
-            <th>Comensales</th>
-            <th>Observaciones</th>
-            <th>Fecha</th>
-            <th>Confirmada</th>
-            <th>Acción</th>
-        </tr>
-        @foreach($reservasPaginadas as $reserva)
-            <tr>
-                <td>{{$reserva->nombre}}</td>
-                <td>{{$reserva->email}}</td>
-                <td>{{$reserva->telefono}}</td>
-                <td>{{$reserva->comensales}}</td>
-                <td>{{$reserva->observaciones}}</td>
-                <td>{{$reserva->fecha->fecha}}</td>
-                @if($reserva->confirmada === 1)
-                    <td>Confirmada</td>
-                @else
-                    <td>
-                        <p>Pendiente</p>
-                        <form action="{{route('reservas.confirmar',  $reserva->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit" class="btn btn-primary text-center">Confirmar</button>
-                        </form>
-                    </td>
-                @endif
-                <td>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('reservas.show', $reserva->id) }}">Ver Mas</a>
-                </td>
-            </tr>
-        @endforeach
-    </table>
-    <div class="paginator d-flex justify-content-center my-3">
-        @if(!$reservasPaginadas->onFirstPage())
-            <a href="/reservas{{ $reservasPaginadas->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
-        @endif
-        <span class="current-page mx-5">Pagina {{$reservasPaginadas->currentPage()}} de {{$reservasPaginadas->lastPage()}}</span>
-
-        @if($reservasPaginadas->hasMorePages())
-            <a href="/reservas{{ $reservasPaginadas->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
-        @endif
+@extends('layout.layout')
+@section('title', "L'assaig - " . $titulo)
+@section('content')
+    @include('partials.breadcrumb', ['breadcrumbs' => $breadcrumbs])
+    <div class="row single-section mx-auto my-5 g-0">
+        <h1 class="text-uppercase font-weight-bold">{{$titulo}}</h1>
     </div>
-</div>
-</body>
-</html>
+    <section class="row single-section mx-auto my-5 g-0">
+        <div class="col-12 py-5">
+            <table id="tabla" class="table table-secondary table-hover table-striped align-middle
+             dt-responsive nowrap py-3" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="py-3">Fecha</th>
+                        <th class="py-3">Comensales</th>
+                        <th class="py-3">Nombre</th>
+                        <th class="py-3">Email</th>
+                        <th class="py-3">Tel&eacute;fono</th>
+                        <th class="py-3">Observaciones</th>
+                        <th class="py-3">Confirmaci&oacute;n</th>
+                        <th class="py-3">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($reservas as $reserva)
+                        <tr>
+                            <td>{{$reserva->fecha->fecha}}</td>
+                            <td>{{$reserva->comensales}}</td>
+                            <td>{{$reserva->nombre}}</td>
+                            <td>{{$reserva->email}}</td>
+                            <td>{{$reserva->telefono}}</td>
+                            <td>{{$reserva->observaciones}}</td>
+                            @if($reserva->confirmada === 1)
+                                <td>Confirmada</td>
+                            @else
+                                <td>
+                                    <p>Pendiente</p>
+                                    <form action="{{route('reservas.confirmar',  $reserva->id)}}" method="POST" class="justify-content-center" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-success">Confirmar</button>
+                                    </form>
+                                </td>
+                            @endif
+                            <td>
+                                <a class="btn btn-secondary" href="{{ route('reservas.show', $reserva->id) }}">Ver Mas</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="py-2">Fecha</th>
+                        <th class="py-2">Comensales</th>
+                        <th class="py-2">Nombre</th>
+                        <th class="py-2">Email</th>
+                        <th class="py-2">Tel&eacute;fono</th>
+                        <th class="py-2">Observaciones</th>
+                        <th class="py-2">Confirmaci&oacute;n</th>
+                        <th class="py-2">Acciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </section>

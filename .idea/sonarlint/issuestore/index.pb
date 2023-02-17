@@ -17,8 +17,6 @@ X
 -app/Http/Controllers/SuscriptorController.php,f/7/f7a188b77835b1e3fc3f0613fa4209793c00e12f
 [
 +app/Http/Controllers/AlergenoController.php,4/4/44468963c24a39c6122c96fe15856f693f4543ff
-[
-+resources/views/layout/navegation.blade.php,3/3/3369bc8050ed3a88c53af6e9ff64ba384cd26ebb
 W
 'resources/views/reserva/store.blade.php,c/0/c0856b4e37713eb9536f149d70074be7abf9ca1b
 W
@@ -35,8 +33,6 @@ T
 $resources/views/fecha/edit.blade.php,c/6/c6699312aaed1c41a3437f63de4ad3753fe5853a
 4
 .env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
-V
-&resources/views/reserva/show.blade.php,d/e/deb5d25f5bde8fa776dd0f52858a7e567ac7f10b
 :
 
 deploy.php,0/a/0a357fad1218ea90522232e7f2fd74b26cfb52c6
@@ -45,3 +41,11 @@ X
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+T
+$app/Http/Requests/ReservaRequest.php,7/b/7b4cde85e0c22dfe3458a87ea8e568e0ed292265
+E
+resources/css/app.css,f/b/fb832949a8835b7bba860cb482ee63cd29bba09b
+[
++resources/views/layout/navegation.blade.php,3/3/3369bc8050ed3a88c53af6e9ff64ba384cd26ebb
+]
+-resources/views/partials/breadcrumb.blade.php,1/a/1aef0b13b90ff3e2ad342b4b9ff8ae013f92f6b6

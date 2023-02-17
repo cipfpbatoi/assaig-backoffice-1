@@ -18,21 +18,26 @@ class ReservaController extends Controller
      */
     public function index(HttpClient $httpClient)
     {
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['name' => 'Reservas']
+        ];
+
         $request = $httpClient->get('http://assaig.api/api/reservas', [
             'Accept' => 'application/json',
         ]);
         $reservas = json_decode($request)->data;
 
+        /*
         $perPage = 10;
         $page = request()->input('page', 1);
         $offset = ($page * $perPage) - $perPage;
         $data = array_slice($reservas, $offset, $perPage);
 
         $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
-
+        */
         $titulo = 'Lista de Reservas';
-        return view('reserva.index', compact('reservasPaginadas', 'titulo'));
-
+        return view('reserva.index', compact('reservas', 'titulo', 'breadcrumbs'));
     }
 
     /**
@@ -68,7 +73,14 @@ class ReservaController extends Controller
             'Accept' => 'application/json',
         ]);
         $reserva = json_decode($reserva)->data;
-        return view('reserva.show', compact('reserva'));
+
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/reservas', 'name' => 'Reservas'],
+            ['name' => 'Reserva ' . $reserva->localizador]
+        ];
+        $titulo = 'Reserva ' . $reserva->localizador;
+        return view('reserva.show', compact('reserva', 'titulo', 'breadcrumbs'));
     }
 
     /**
@@ -128,8 +140,13 @@ class ReservaController extends Controller
 
         $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
 
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/reservas', 'name' => 'Reservas'],
+            ['name' => 'Reservas pendientes']
+        ];
         $titulo = 'Reservas Pendientes';
-        return view('reserva.index', compact('reservasPaginadas', 'titulo'));
+        return view('reserva.index', compact('reservasPaginadas', 'titulo', 'breadcrumbs'));
 
     }
 
@@ -148,8 +165,13 @@ class ReservaController extends Controller
         $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
 
         $fecha = $reservasPaginadas[0]->fecha;
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/reservas', 'name' => 'Reservas'],
+            ['name' => 'Reservas de ' . $fecha->fecha]
+        ];
         $titulo = 'Reservas para el día ' . $fecha->fecha;
-        return view('reserva.index', compact('reservasPaginadas', 'titulo'));
+        return view('reserva.index', compact('reservasPaginadas', 'titulo', 'breadcrumbs'));
 
     }
 }

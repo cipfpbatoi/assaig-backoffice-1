@@ -1,0 +1,192 @@
+body {
+    background-color: #ececec;
+    padding-top: 200px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+nav img {
+    height: 180px;
+}
+
+a {
+    text-decoration: none;
+}
+
+footer {
+    margin-top: 90px;
+}
+
+.section-img {
+    object-fit: cover;
+}
+
+a {
+    color: #fff;
+}
+
+a:hover {
+    color:  #93BE0F !important;
+}
+
+h1,h2,h3,h4,.nav-link {
+    font-family: 'Lexend', sans-serif;
+}
+
+h1 {
+    font-size: 3.5em;
+    color: #93BE0F !important;
+}
+
+h2 {
+    font-size: 2.5em;
+    color: #93BE0F !important;
+}
+
+.nav-link {
+    font-size: 1.6em;
+}
+
+h3 {
+    line-height: 60px;
+}
+
+p {
+    text-align: justify;
+}
+
+textarea {
+    resize: none;
+}
+
+.nav-link.active {
+    color:  #93BE0F !important;
+}
+
+.breadcrumb a {
+    color: #93BE0F;
+    font-weight: 500;
+    margin-bottom: 100px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+
+.single-section {
+    max-width: 1504px;
+}
+
+.media-section {
+    height: 250px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.slider-img {
+    min-height: 400px;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.descripcion {
+    height: 300px;
+}
+
+.descripcion img {
+    object-fit: contain;
+    height: 300px;
+}
+
+.ficha img {
+    object-fit: cover;
+    height: 400px;
+}
+
+.seccion-mapa {
+    height: 400px;
+}
+
+.mapa-elems {
+    height: 1200px;
+}
+
+.seccion-mapa img{
+    object-fit: cover;
+    height: 300px;
+}
+
+.scroll img{
+    object-fit: cover;
+    height: 150px;
+}
+
+.pagination {
+    --bs-pagination-active-bg: #93BE0F;
+    --bs-pagination-border-color: none;
+}
+
+.pagination a:focus, .form-control:focus, .form-select:focus {
+    box-shadow: none;
+}
+
+.form-control {
+    border: #fff;
+}
+
+.form-select, .form-select option {
+    border: #fff;
+}
+
+.pagination a:hover {
+    color: black !important;
+}
+
+.form-select:focus {
+    border: 0px none #fff !important;
+}
+
+#tabla_wrapper>.row>.col-sm-12 {
+    margin-bottom: 10px;
+}
+.btn-success, .btn-success:hover {
+    background-color: #93BE0F;
+    border-color: #93BE0F;
+}
+
+.btn-success:hover {
+    color: black;
+}
+
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before {
+    background-color: #93BE0F;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control::before {
+    box-shadow: none;
+    border-radius: 0;
+}
+@media (max-width: 768px) {
+    .single-section {
+        max-width: 350px;
+    }
+    .media-section {
+        height: 600px;
+    }
+    h3 {
+        line-height: 30px;
+    }
+    h1 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 1140px) {
+    .nav-link {
+        font-size: 1.2em;
+    }
+}
