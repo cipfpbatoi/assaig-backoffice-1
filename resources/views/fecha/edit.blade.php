@@ -74,24 +74,33 @@
         </div>
 
         <div class="form-group">
-            <label for="horario_cierre">Profesores de Sala</label>
-            @foreach ($profesores as $profesor)
+            <label for="horario_cierre">Profesores Sala</label>
+            @foreach ($profesorSala as $profesor)
                 <div>
                     <label>
                         <input type="checkbox"
-                               @if($profesor->tipo === 'sala')
-                                   name="profesores_sala[]"
-                               @elseif($profesor->tipo === 'cocina')
-                                   name="profesores_cocina[]"
-                               @endif
-
-
+                               name="profesores_sala[]"
                                value="{{ $profesor->id }}"
                            @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
                                checked
                             @endif
                         >
-
+                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
+                    </label>
+                </div>
+            @endforeach
+    <br>
+            <label for="horario_cierre">Profesores Cocina</label>
+            @foreach ($profesorCocina as $profesor)
+                <div>
+                    <label>
+                        <input type="checkbox"
+                               name="profesores_cocina[]"
+                               value="{{ $profesor->id }}"
+                               @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
+                                   checked
+                            @endif
+                        >
                         {{ $profesor->nombre }} - {{ $profesor->tipo }}
                     </label>
                 </div>

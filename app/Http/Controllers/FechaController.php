@@ -155,13 +155,7 @@ class FechaController extends Controller
                array_push($profesorCocina, $profesor);
            }
         }
-        // Mandar solo los profesores al blade y los otros, si estan in array el elemeneto lo pondra
-        /*
-         * @if(in_array($profesor['nombre'], $profesoresSalaNombres) || in_array($profesor['nombre'], $profesoresCocinaNombres))
-                checked
-            @endif
-         * */
-        return view('fecha.edit', compact('fecha', 'profesoresSalaNombres', 'profesoresCocinaNombres','profesores', 'horarioApertura', 'horarioCierre'));
+        return view('fecha.edit', compact('fecha', 'profesoresSalaNombres', 'profesoresCocinaNombres','profesorSala', 'profesorCocina', 'horarioApertura', 'horarioCierre'));
     }
 
     /**
