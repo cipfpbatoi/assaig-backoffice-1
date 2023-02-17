@@ -1,50 +1,31 @@
 
 <html>
 <head>
-    <style>
-        form {
-            width: 400px;
-            margin: auto;
-            text-align: center;
-        }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
 
-        input[type="text"], input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-top: 6px;
-            margin-bottom: 16px;
-            resize: vertical;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
 </head>
 <body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 mx-auto d-flex justify-content-center">
+                <form action="{{ route('login') }}" class="pt-5 w-50">
+                    @csrf
+                    <h3>Login del BackOffice de Assaig Restaurante de CIP FP Batoi</h3>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control">
 
-<form action="{{ route('login') }}">
-    @csrf
-    <h3>Login del BackOffice de Assaig Restaurante de CIP FP Batoi</h3>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" class="form-control">
 
-    <label for="password">Contraseña:</label>
-    <input type="password" id="password" name="password">
-
-    <input type="submit" value="Enviar">
-</form>
+                    <button type="button" class="btn btn-primary btn-block mb-4">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
