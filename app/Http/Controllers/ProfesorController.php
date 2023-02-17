@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\HttpClient;
+use App\Http\Requests\ProfesorRequest;
+use App\Models\Fecha;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 class ProfesorController extends Controller
 {
@@ -49,11 +53,13 @@ class ProfesorController extends Controller
      */
     public function store(Request $request)
     {
-        $profesor = new Profesor();
-        $profesor->nombre = $request->nombre;
-        $profesor->tipo = $request->tipo;
-        $profesor->save();
-        return redirect()->route('profesor.index');
+
+        $response = Http::asForm()->post('http://assaig.api/api/profesores', $request);
+        if ($response->status()=== 201) {
+            return redirect()->route('profesores.index');
+        }else{
+            return redirect()->route('profesores.create');
+        }
     }
 
     /**
@@ -62,10 +68,13 @@ class ProfesorController extends Controller
      * @param  \App\Models\Profesor  $profesor
      * @return \Illuminate\Http\Response
      */
-    public function show(Profesor $profesor)
+    public function show(HttpClient $httpClient, Profesor $profesor)
     {
-        $profesorToFind = Profesor::findOrFail($profesor->id);
-        return view('reserva.show', compact('profesorToFind'));
+        $profesor = $httpClient->get('http://assaig.api/api/profesores/' . $profesor->id, [
+            'Accept' => 'application/json',
+        ]);
+        $profesor = json_decode($profesor)->data;
+        return view('profesor.show', compact('profesor'));
     }
 
     /**
@@ -74,9 +83,13 @@ class ProfesorController extends Controller
      * @param  \App\Models\Profesor  $profesor
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit(Profesor $profesor)
+    public function edit(HttpClient $httpClient, $id)
     {
-        return view('profesor.edit', compact('profesor'));
+        $profesor = $httpClient->get('http://assaig.api/api/profesores/' . $id, [
+            'Accept' => 'application/json',
+        ]);
+        $profesor = json_decode($profesor)->data;
+        return view('profesor.edit', compact('profesor', 'id'));
     }
 
     /**
@@ -86,24 +99,62 @@ class ProfesorController extends Controller
      * @param  \App\Models\Profesor  $profesor
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Profesor $profesor)
+    public function update(ProfesorRequest $request, $profesor)
     {
-        $profesor->nombre = $request->nombre;
-        $profesor->tipo = $request->tipo;
-        $profesor->save();
-        return redirect()->route('profesor.index');
+        $response = Http::put('http://assaig.api/api/profesores/'.$profesor, [
+            'nombre'=>$request->nombre,
+            'tipo'=>$request->tipo
+        ]);
+
+        if ($response->status()=== 200) {
+            return redirect()->route('profesores.index');
+        } else {
+            return response()->json(['error' => $response->status()]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Profesor  $profesor
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Profesor $profesor)
+    public function destroy($profesorId)
     {
-        $profesorToDelete = Profesor::find($profesor->id);
-        $profesorToDelete->delete();
-        $this->index();
+        $response = Http::delete('http://assaig.api/api/profesores/' . $profesorId, $profesorId);
+        if ($response->status()=== 204) {
+            return redirect()->route('profesores.index');
+        }else{
+            return redirect()->route('fechas.index');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Profesor  $profesor
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function profesoresByFechas(HttpClient $httpClient, $profesorId)
+    {
+        $request = $httpClient->get('http://assaig.api/api/profesores/' . $profesorId, [
+            'Accept' => 'application/json',
+        ]);
+        $profesor = json_decode($request)->data;
+        $profesor = $profesor->nombre;
+        $request = $httpClient->get('http://assaig.api/api/fechas-profesor/' . $profesorId, [
+            'Accept' => 'application/json',
+        ]);
+        $fechas = json_decode($request)->data;
+
+        $perPage = 10;
+        $page = request()->input('page', 1);
+        $offset = ($page * $perPage) - $perPage;
+        $data = array_slice($fechas, $offset, $perPage);
+
+        $fechasPaginados = new LengthAwarePaginator($data, count($fechas),$perPage, $page);
+
+        return view('profesor.list', compact('fechasPaginados', 'profesor'));
     }
 }

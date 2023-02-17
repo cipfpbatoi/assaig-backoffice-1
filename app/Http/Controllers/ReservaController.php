@@ -156,7 +156,6 @@ class ReservaController extends Controller
             'Accept' => 'application/json',
         ]);
         $reservas = json_decode($request)->data;
-
         $perPage = 10;
         $page = request()->input('page', 1);
         $offset = ($page * $perPage) - $perPage;
@@ -172,6 +171,5 @@ class ReservaController extends Controller
         ];
         $titulo = 'Reservas para el día ' . $fecha->fecha;
         return view('reserva.index', compact('reservasPaginadas', 'titulo', 'breadcrumbs'));
-
     }
 }

@@ -14,6 +14,7 @@
         <tr class="table-primary">
             <th>Nombre</th>
             <th>Tipo</th>
+            <th>Información</th>
             <th>Acción</th>
         </tr>
         @foreach($datosPaginados as $profesor)
@@ -21,21 +22,30 @@
                 <td>{{$profesor->nombre}}</td>
                 <td>{{$profesor->tipo}}</td>
                 <td>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesor.edit', $profesor->id) }}">Editar</a>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesor.profesoresByFechas', $profesor->id) }}">Ver Fechas</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.edit', $profesor->id) }}">Editar</a>
+
+                    <form action="{{route('profesores.destroy',  $profesor->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary text-center">Borrar</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
 
     </table>
-    <a class="btn btn-primary text-center mb-3" href="{{ route('profesor.create') }}">Añadir Profesor</a>
+    <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.create') }}">Añadir Profesor</a>
     <div class="paginator d-flex justify-content-center my-3">
         @if(!$datosPaginados->onFirstPage())
-            <a href="{{ $datosPaginados->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
+            <a href="/profesores{{ $datosPaginados->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
         @endif
         <span class="current-page mx-5">Pagina {{$datosPaginados->currentPage()}} de {{$datosPaginados->lastPage()}}</span>
 
         @if($datosPaginados->hasMorePages())
-            <a href="{{ $datosPaginados->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
+            <a href="/profesores{{ $datosPaginados->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
         @endif
     </div>
 </div>
