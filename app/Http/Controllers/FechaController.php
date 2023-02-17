@@ -179,6 +179,7 @@ class FechaController extends Controller
         //$date->user_id = $request->user_id;
         $date->save();
         return redirect()->route('fecha.show', $date);*/
+        dd($request);
         $response = Http::asForm()->put('http://assaig.api/api/fechas/' . $fechaId, [
             'fecha'=>$request->fecha,
             'pax'=>$request->pax,

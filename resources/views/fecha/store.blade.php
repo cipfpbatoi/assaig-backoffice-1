@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label for="pax_espera">Pax Esperada</label>
-            <input type="number" name="pax_espera" id="pax_espera" class="form-control" value="{{ old('pax_espera') ?? ''}}">
+            <input type="number" name="pax_espera" id="pax_espera" class="form-control" value="{{ old('pax_espera') ?? '0'}}">
             @if ($errors->has('pax_espera'))
                 <div class="text-danger">
                     {{ $errors->first('pax_espera') }}
