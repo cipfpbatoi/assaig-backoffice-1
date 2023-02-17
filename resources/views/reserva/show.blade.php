@@ -20,8 +20,8 @@
 
         <p>Listado Alergenos</p>
         <ul>
-            @foreach($reserva->alergeno_reservas ?? [] as $alergeno)
-                <li>{{ $alergeno->alergeno->nombre }}</li>
+            @foreach($reserva->alergenos ?? [] as $alergeno)
+                <li>{{ $alergeno->nombre }}</li>
             @endforeach
         </ul>
 

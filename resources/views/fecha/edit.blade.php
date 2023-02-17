@@ -55,7 +55,7 @@
 
         <div class="form-group">
             <label for="horario_apertura">Horario de Apertura</label>
-            <input type="time" name="horario_apertura" id="horario_apertura" class="form-control" value="{{ $fecha->horario_apertura }}">
+            <input type="time" name="horario_apertura" id="horario_apertura" class="form-control" value="{{ $horarioApertura }}">
             @if ($errors->has('horario_apertura'))
                 <div class="text-danger">
                     {{ $errors->first('horario_apertura') }}
@@ -65,7 +65,7 @@
 
         <div class="form-group">
             <label for="horario_cierre">Horario de Cierre</label>
-            <input type="time" name="horario_cierre" id="horario_cierre" class="form-control" value="{{ $fecha->horario_cierre }}">
+            <input type="time" name="horario_cierre" id="horario_cierre" class="form-control" value="{{ $horarioCierre }}">
             @if ($errors->has('horario_cierre'))
                 <div class="text-danger">
                     {{ $errors->first('horario_cierre') }}
@@ -75,42 +75,28 @@
 
         <div class="form-group">
             <label for="horario_cierre">Profesores de Sala</label>
-            @foreach ($profesores_sala_fecha as $profesor)
+            @foreach ($profesores as $profesor)
                 <div>
                     <label>
-                        <input type="checkbox" name="profesores_sala[]" value="{{ $profesor->id }}" checked>
+                        <input type="checkbox"
+                               @if($profesor->tipo === 'sala')
+                                   name="profesores_sala[]"
+                               @elseif($profesor->tipo === 'cocina')
+                                   name="profesores_cocina[]"
+                               @endif
+
+
+                               value="{{ $profesor->id }}"
+                           @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
+                               checked
+                            @endif
+                        >
 
                         {{ $profesor->nombre }} - {{ $profesor->tipo }}
                     </label>
                 </div>
             @endforeach
-            @foreach ($profesorSala as $profesor)
-                <div>
-                    <label>
-                        <input type="checkbox" name="profesores_sala[]" value="{{ $profesor->id }}">
 
-                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
-                    </label>
-                </div>
-            @endforeach
-            <label for="horario_cierre">Profesores de Cocina</label>
-            @foreach ($profesores_cocina_fecha as $profesor)
-                <div>
-                    <label>
-                        <input type="checkbox" name="profesores_cocina[]" value="{{ $profesor->id }}" checked>
-                        {{ $profesor->nombre }}
-                    </label>
-                </div>
-            @endforeach
-
-            @foreach ($profesorCocina as $profesor)
-                <div>
-                    <label>
-                        <input type="checkbox" name="profesores_cocina[]" value="{{ $profesor->id }}">
-                        {{ $profesor->nombre }}
-                    </label>
-                </div>
-            @endforeach
         </div>
 
         <input type="hidden" name="user_id" id="user_id" class="user_id" value="{{ Auth::user()->id ?? ''}}" min="0">

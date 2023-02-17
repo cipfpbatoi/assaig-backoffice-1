@@ -7,6 +7,7 @@ use App\Models\Fecha;
 use App\Models\Profesor;
 use App\Models\Profesor_fecha_cocina;
 use App\Models\Profesor_fecha_sala;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use App\Http\HttpClient;
@@ -42,9 +43,22 @@ class FechaController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(HttpClient $httpClient)
     {
-        return view('fecha.store');
+        $profesores = $httpClient->get('http://assaig.api/api/profesores', [
+            'Accept' => 'application/json',
+        ]);
+        $profesores = json_decode($profesores)->data;
+        $profesoresSala = [];
+        $profesoresCocina = [];
+        foreach ($profesores as $profesor){
+            if($profesor->tipo === 'sala'){
+                array_push($profesoresSala, $profesor);
+            }else{
+                array_push($profesoresCocina, $profesor);
+            }
+        }
+        return view('fecha.store', compact('profesoresSala', 'profesoresCocina'));
     }
 
     /**
@@ -68,7 +82,17 @@ class FechaController extends Controller
         $date->save();
         return redirect()->route('fecha.show', $date);*/
 
-        $response = Http::asForm()->post('http://assaig.api/api/fechas', $request);
+        $response = Http::asForm()->post('http://assaig.api/api/fechas', [
+            'fecha'=>$request->fecha,
+            'pax'=>$request->pax,
+            'overbooking'=>$request->overbooking,
+            'pax_espera'=>$request->pax_espera,
+            'horario_apertura'=>$request->horario_apertura,
+            'horario_cierre'=>$request->horario_cierre,
+            'profesores_sala'=>$request->profesores_sala,
+            'profesores_cocina'=>$request->profesores_cocina,
+        ]);
+
         if ($response->status()=== 201) {
             return redirect()->route('fechas.index');
         }else{
@@ -103,6 +127,13 @@ class FechaController extends Controller
             'Accept' => 'application/json',
         ]);
         $fecha = json_decode($fecha)->data;
+        $horarioApertura = $fecha->horario_apertura;
+        $horarioApertura = Carbon::parse($horarioApertura);
+        $horarioApertura = $horarioApertura->format('H:i');
+
+        $horarioCierre = $fecha->horario_cierre;
+        $horarioCierre = Carbon::parse($horarioCierre);
+        $horarioCierre = $horarioCierre->format('H:i');
 
         $profesores = $httpClient->get('http://assaig.api/api/profesores', [
             'Accept' => 'application/json',
@@ -110,6 +141,9 @@ class FechaController extends Controller
         $profesores = json_decode($profesores)->data;
         $profesores_sala_fecha = $fecha->profesores_sala;
         $profesores_cocina_fecha = $fecha->profesores_cocina;
+
+        $profesoresSalaNombres = array_column($profesores_sala_fecha, 'nombre');
+        $profesoresCocinaNombres = array_column($profesores_cocina_fecha, 'nombre');
 
         $profesorSala = [];
         $profesorCocina = [];
@@ -121,8 +155,13 @@ class FechaController extends Controller
                array_push($profesorCocina, $profesor);
            }
         }
-
-        return view('fecha.edit', compact('fecha', 'profesorCocina', 'profesores_cocina_fecha', 'profesores_sala_fecha', 'profesorSala'));
+        // Mandar solo los profesores al blade y los otros, si estan in array el elemeneto lo pondra
+        /*
+         * @if(in_array($profesor['nombre'], $profesoresSalaNombres) || in_array($profesor['nombre'], $profesoresCocinaNombres))
+                checked
+            @endif
+         * */
+        return view('fecha.edit', compact('fecha', 'profesoresSalaNombres', 'profesoresCocinaNombres','profesores', 'horarioApertura', 'horarioCierre'));
     }
 
     /**
@@ -146,7 +185,6 @@ class FechaController extends Controller
         //$date->user_id = $request->user_id;
         $date->save();
         return redirect()->route('fecha.show', $date);*/
-
         $response = Http::asForm()->put('http://assaig.api/api/fechas/' . $fechaId, [
             'fecha'=>$request->fecha,
             'pax'=>$request->pax,
@@ -154,11 +192,13 @@ class FechaController extends Controller
             'pax_espera'=>$request->pax_espera,
             'horario_apertura'=>$request->horario_apertura,
             'horario_cierre'=>$request->horario_cierre,
+            'profesores_sala'=>$request->profesores_sala,
+            'profesores_cocina'=>$request->profesores_cocina,
         ]);
-        if ($response->status()=== 200) {
+        if ($response->status()=== 201) {
             return redirect()->route('fechas.index');
         }else{
-            return redirect()->route('fechas.create');
+            return $response->status();
         }
     }
 
