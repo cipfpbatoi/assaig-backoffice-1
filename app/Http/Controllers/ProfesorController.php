@@ -54,15 +54,6 @@ class ProfesorController extends Controller
     public function store(Request $request)
     {
 
-        /*$profesor = new Profesor();
-        $profesor->nombre = $request->nombre;
-        $profesor->tipo = $request->tipo;
-        $profesor->save();*/
-
-        /*$response = Http::asForm()->post('http://assaig.api/api/profesores', [
-            'nombre' => $request->nombre,
-            'tipo' => $request->tipo
-        ]);*/
         $response = Http::asForm()->post('http://assaig.api/api/profesores', $request);
         if ($response->status()=== 201) {
             return redirect()->route('profesores.index');
@@ -83,7 +74,6 @@ class ProfesorController extends Controller
             'Accept' => 'application/json',
         ]);
         $profesor = json_decode($profesor)->data;
-        //$profesorToFind = Profesor::findOrFail($profesor->id);
         return view('profesor.show', compact('profesor'));
     }
 
@@ -111,21 +101,6 @@ class ProfesorController extends Controller
      */
     public function update(ProfesorRequest $request, $profesor)
     {
-        /*$data = [
-             'request'=> $request->toArray(),
-             'profesor' => $profesor
-         ];
-
-         $response = Http::asForm()->put('http://assaig.api/api/profesores/' . $profesor->id, [
-             'json'=>$data
-         ]);
-
-         if ($response->status()=== 201) {
-             return redirect()->route('profesores.index');
-         }else{
-             return redirect()->route('profesores.create');
-         }*/
-
         $response = Http::put('http://assaig.api/api/profesores/'.$profesor, [
             'nombre'=>$request->nombre,
             'tipo'=>$request->tipo
@@ -146,10 +121,6 @@ class ProfesorController extends Controller
      */
     public function destroy($profesorId)
     {
-        /*$profesorToDelete = Profesor::find($profesor->id);
-        $profesorToDelete->delete();
-        $this->index();*/
-
         $response = Http::delete('http://assaig.api/api/profesores/' . $profesorId, $profesorId);
         if ($response->status()=== 204) {
             return redirect()->route('profesores.index');

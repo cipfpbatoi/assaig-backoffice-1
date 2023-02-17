@@ -69,19 +69,6 @@ class FechaController extends Controller
      */
     public function store(Request $request)
     {
-        /*$date = new Fecha();
-        $date->fecha = $request->fecha;
-        $date->pax = $request->pax;
-        $date->overbooking = $request->overbooking;
-        $date->pax_espera = $request->pax_espera;
-        $date->horario_apertura = $request->horario_apertura;
-        $date->horario_cierre = $request->horario_cierre;
-        //CAMBIAR ES PARA PRUEBAS
-        $date->user_id = 1;
-        //$date->user_id = $request->user_id;
-        $date->save();
-        return redirect()->route('fecha.show', $date);*/
-
         $response = Http::asForm()->post('http://assaig.api/api/fechas', [
             'fecha'=>$request->fecha,
             'pax'=>$request->pax,
@@ -163,23 +150,10 @@ class FechaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Fecha  $fecha
-     * @return \Illuminate\Http\RedirectResponse
+     * @return int
      */
     public function update(FechaUpdateRequest $request, $fechaId)
     {
-        /*$date = Fecha::find($fecha->id);
-        $date->fecha = $request->fecha;
-        $date->pax = $request->pax;
-        $date->overbooking = $request->overbooking;
-        $date->pax_espera = $request->pax_espera;
-        $date->horario_apertura = $request->horario_apertura;
-        $date->horario_cierre = $request->horario_cierre;
-        //CAMBIAR ES PARA PRUEBAS
-        $date->user_id = 1;
-        //$date->user_id = $request->user_id;
-        $date->save();
-        return redirect()->route('fecha.show', $date);*/
-        dd($request);
         $response = Http::asForm()->put('http://assaig.api/api/fechas/' . $fechaId, [
             'fecha'=>$request->fecha,
             'pax'=>$request->pax,
@@ -205,8 +179,6 @@ class FechaController extends Controller
      */
     public function destroy(Fecha $fecha)
     {
-        /*$fecha->delete();
-        return redirect()->route('fecha');*/
         $response = Http::delete('http://assaig.api/api/fechas/' . $fecha->id, (array)$fecha);
         if ($response->status()=== 204) {
             return redirect()->route('fechas.index');
