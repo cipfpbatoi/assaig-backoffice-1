@@ -108,8 +108,6 @@
 
         </div>
 
-        <input type="hidden" name="user_id" id="user_id" class="user_id" value="{{ Auth::user()->id ?? ''}}" min="0">
-
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">Editar</button>
         </div>
