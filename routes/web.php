@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProfesorController;
 use \App\Http\Controllers\ReservaController;
 use \App\Http\Controllers\FechaController;
-
+use \App\Http\Controllers\AuthenticateController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,11 +24,12 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
 Route::get('/register', function () {
     return view('register');
 })->name('register');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
 
 Route::resource('profesores', ProfesorController::class);
 Route::resource('fechas', FechaController::class);

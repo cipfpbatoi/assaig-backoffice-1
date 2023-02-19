@@ -13,8 +13,9 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-12 col-md-6 mx-auto d-flex justify-content-center">
-                <form action="{{ route('login') }}" class="pt-5 w-50">
+                <form action="{{ route('login') }}" class="pt-5 w-50" method="POST">
                     @csrf
+                    @method('POST')
                     <h3>Login del BackOffice de Assaig Restaurante de CIP FP Batoi</h3>
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" class="form-control">
@@ -22,7 +23,11 @@
                     <label for="password">Contraseña:</label>
                     <input type="password" id="password" name="password" class="form-control">
 
-                    <button type="button" class="btn btn-primary btn-block mb-4">Enviar</button>
+                    @if (session('errors') && session('errors')->has('email'))
+                        <div class="alert alert-danger">{{ session('errors')->first('email') }}</div>
+                    @endif
+
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Enviar</button>
                 </form>
             </div>
         </div>
