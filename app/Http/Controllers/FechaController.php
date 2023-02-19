@@ -26,16 +26,16 @@ class FechaController extends Controller
         $datos = $httpClient->get('http://assaig.api/api/fechas', [
             'Accept' => 'application/json',
         ]);
-        $datos = json_decode($datos)->data;
+        $dates = json_decode($datos)->data;
 
-        $perPage = 10;
-        $page = request()->input('page', 1);
-        $offset = ($page * $perPage) - $perPage;
-        $data = array_slice($datos, $offset, $perPage);
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['name' => 'Fechas']
+        ];
 
-        $datesPaginadas = new LengthAwarePaginator($data, count($datos), $perPage, $page);
+        $titulo = 'Lista de fechas';
 
-        return view('fecha.index', compact('datesPaginadas'));
+        return view('fecha.index', compact('dates', 'breadcrumbs', 'titulo'));
     }
 
     /**
@@ -58,7 +58,16 @@ class FechaController extends Controller
                 array_push($profesoresCocina, $profesor);
             }
         }
-        return view('fecha.store', compact('profesoresSala', 'profesoresCocina'));
+
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/fechas', 'name' => 'Fechas'],
+            ['name' => 'Añadir fecha']
+        ];
+
+        $titulo = 'Nueva fecha';
+
+        return view('fecha.store', compact('profesoresSala', 'profesoresCocina', 'breadcrumbs', 'titulo'));
     }
 
     /**
@@ -67,7 +76,7 @@ class FechaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(FechaUpdateRequest $request)
     {
         $response = Http::asForm()->post('http://assaig.api/api/fechas', [
             'fecha'=>$request->fecha,
@@ -99,7 +108,15 @@ class FechaController extends Controller
             'Accept' => 'application/json',
         ]);
         $fecha = json_decode($fecha)->data;
-        return view('fecha.show', compact('fecha'));
+
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/fechas', 'name' => 'Home'],
+            ['name' => $fecha->fecha]
+        ];
+
+        $titulo = 'Detalles del día ' . $fecha->fecha;
+        return view('fecha.show', compact('fecha', 'breadcrumbs', 'titulo'));
     }
 
     /**
@@ -132,17 +149,26 @@ class FechaController extends Controller
         $profesoresSalaNombres = array_column($profesores_sala_fecha, 'nombre');
         $profesoresCocinaNombres = array_column($profesores_cocina_fecha, 'nombre');
 
-        $profesorSala = [];
-        $profesorCocina = [];
+        $profesoresSala = [];
+        $profesoresCocina = [];
         foreach ($profesores as $profesor){
            if($profesor->tipo === 'sala')
            {
-               array_push($profesorSala, $profesor);
+               array_push($profesoresSala, $profesor);
            }else{
-               array_push($profesorCocina, $profesor);
+               array_push($profesoresCocina, $profesor);
            }
         }
-        return view('fecha.edit', compact('fecha', 'profesoresSalaNombres', 'profesoresCocinaNombres','profesorSala', 'profesorCocina', 'horarioApertura', 'horarioCierre'));
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/fechas', 'name' => 'Fechas'],
+            ['name' => 'Crear fecha']
+        ];
+
+        $titulo = 'Editar fecha';
+        return view('fecha.edit', compact('fecha', 'profesoresSalaNombres',
+            'profesoresCocinaNombres','profesoresSala', 'profesoresCocina', 'horarioApertura', 'horarioCierre',
+        'titulo', 'breadcrumbs'));
     }
 
     /**
@@ -185,5 +211,35 @@ class FechaController extends Controller
         }else{
             return redirect()->route('fechas.index');
         }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Profesor  $profesor
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function fechasByProfesor(HttpClient $httpClient, $profesorId)
+    {
+        $request = $httpClient->get('http://assaig.api/api/profesores/' . $profesorId, [
+            'Accept' => 'application/json',
+        ]);
+        $profesor = json_decode($request)->data;
+        $profesor = $profesor->nombre;
+        $request = $httpClient->get('http://assaig.api/api/fechas-profesor/' . $profesorId, [
+            'Accept' => 'application/json',
+        ]);
+        $fechas = json_decode($request)->data;
+
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/fechas', 'name' => 'Fechas'],
+            ['name' => $profesor]
+        ];
+
+        $titulo = 'Fechas de ' . $profesor;
+
+        return view('fecha.fechas-profesor', compact('fechas', 'profesor', 'titulo', 'breadcrumbs'));
     }
 }

@@ -23,16 +23,15 @@ class ProfesorController extends Controller
         $datos = $httpClient->get('http://assaig.api/api/profesores', [
             'Accept' => 'application/json',
         ]);
-        $datos = json_decode($datos)->data;
+        $profesores = json_decode($datos)->data;
 
-        $perPage = 10;
-        $page = request()->input('page', 1);
-        $offset = ($page * $perPage) - $perPage;
-        $data = array_slice($datos, $offset, $perPage);
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['name' => 'Profesores']
+        ];
 
-        $datosPaginados = new LengthAwarePaginator($data, count($datos), $perPage, $page);
-
-        return view('profesor.index', compact('datosPaginados'));
+        $titulo = 'Lista de profesores';
+        return view('profesor.index', compact('profesores','titulo', 'breadcrumbs'));
     }
 
     /**
@@ -42,7 +41,14 @@ class ProfesorController extends Controller
      */
     public function create()
     {
-        return view('profesor.store');
+        $breadcrumbs = [
+        ['link' => '/', 'name' => 'Home'],
+        ['link' => '/profesores', 'name' => 'Profesores'],
+        ['name' => 'Añadir profesor']
+    ];
+
+        $titulo = 'Nuevo profesor';
+        return view('profesor.store', compact('breadcrumbs', 'titulo'));
     }
 
     /**
@@ -51,7 +57,7 @@ class ProfesorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProfesorRequest $request)
     {
 
         $response = Http::asForm()->post('http://assaig.api/api/profesores', $request);
@@ -89,7 +95,14 @@ class ProfesorController extends Controller
             'Accept' => 'application/json',
         ]);
         $profesor = json_decode($profesor)->data;
-        return view('profesor.edit', compact('profesor', 'id'));
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/profesores', 'name' => 'Profesores'],
+            ['name' => 'Editar']
+        ];
+
+        $titulo = 'Editar Profesor';
+        return view('profesor.edit', compact('profesor', 'id', 'breadcrumbs', 'titulo'));
     }
 
     /**
@@ -129,32 +142,19 @@ class ProfesorController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Profesor  $profesor
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function profesoresByFechas(HttpClient $httpClient, $profesorId)
+    public function profesoresByFecha(HttpClient $httpClient, $fechaId)
     {
-        $request = $httpClient->get('http://assaig.api/api/profesores/' . $profesorId, [
+        $request = $httpClient->get('http://assaig.api/api/fechas/' . $fechaId, [
             'Accept' => 'application/json',
         ]);
-        $profesor = json_decode($request)->data;
-        $profesor = $profesor->nombre;
-        $request = $httpClient->get('http://assaig.api/api/fechas-profesor/' . $profesorId, [
-            'Accept' => 'application/json',
-        ]);
-        $fechas = json_decode($request)->data;
+        $fecha = json_decode($request)->data;
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/profesores', 'name' => 'Profesores'],
+            ['name' => $fecha->fecha]
+        ];
 
-        $perPage = 10;
-        $page = request()->input('page', 1);
-        $offset = ($page * $perPage) - $perPage;
-        $data = array_slice($fechas, $offset, $perPage);
-
-        $fechasPaginados = new LengthAwarePaginator($data, count($fechas),$perPage, $page);
-
-        return view('profesor.list', compact('fechasPaginados', 'profesor'));
+        $titulo = 'Profesores para el día ' . $fecha->fecha;
+        return view('profesor.profesores-fecha', compact('fecha', 'breadcrumbs', 'titulo'));
     }
 }

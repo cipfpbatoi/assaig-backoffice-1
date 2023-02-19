@@ -31,7 +31,9 @@ Route::put('/confirmar-reserva/{id}', [ReservaController::class, 'confirmar'])->
 Route::get('/reservas-pendientes', [ReservaController::class, 'pendientes'])->name('reservas.pendientes');
 Route::get('/reservas-fecha/{id}', [ReservaController::class, 'reservasFecha'])->name('reservas.reservasFecha');
 
-Route::get('/fechas-profesor/{id}', [ProfesorController::class, 'profesoresByFechas'])->name('profesor.profesoresByFechas');
+Route::get('/fechas-profesor/{id}', [FechaController::class, 'fechasByProfesor'])->name('fechas.fechasByProfesor');
+Route::get('/profesores-fecha/{id}', [ProfesorController::class, 'profesoresByFecha'])->name('profesores.profesoresByFecha');
+
 
 
 

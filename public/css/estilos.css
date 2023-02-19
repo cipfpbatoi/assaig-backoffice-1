@@ -1,7 +1,7 @@
 body {
     background-color: #ececec;
     padding-top: 200px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lexend', sans-serif;
 }
 
 nav img {
@@ -28,34 +28,37 @@ a:hover {
     color:  #93BE0F !important;
 }
 
-h1,h2,h3,h4,.nav-link {
-    font-family: 'Lexend', sans-serif;
-}
-
 h1 {
-    font-size: 3.5em;
+    font-size: 37px;
+    font-weight: 600;
+    line-height: 40px;
     color: #93BE0F !important;
 }
 
 h2 {
-    font-size: 2.5em;
-    color: #93BE0F !important;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 40px;
 }
 
 .nav-link {
-    font-size: 1.6em;
-}
-
-h3 {
-    line-height: 60px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 22px;
 }
 
 p {
-    text-align: justify;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 26px;
 }
 
 textarea {
     resize: none;
+}
+
+.alergeno-img {
+    width: 30px;
 }
 
 .nav-link.active {
@@ -72,53 +75,8 @@ textarea {
     text-decoration: underline;
 }
 
-
 .single-section {
     max-width: 1504px;
-}
-
-.media-section {
-    height: 250px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-}
-
-.slider-img {
-    min-height: 400px;
-    max-height: 400px;
-    object-fit: contain;
-}
-
-.descripcion {
-    height: 300px;
-}
-
-.descripcion img {
-    object-fit: contain;
-    height: 300px;
-}
-
-.ficha img {
-    object-fit: cover;
-    height: 400px;
-}
-
-.seccion-mapa {
-    height: 400px;
-}
-
-.mapa-elems {
-    height: 1200px;
-}
-
-.seccion-mapa img{
-    object-fit: cover;
-    height: 300px;
-}
-
-.scroll img{
-    object-fit: cover;
-    height: 150px;
 }
 
 .pagination {
@@ -146,16 +104,35 @@ textarea {
     border: 0px none #fff !important;
 }
 
-#tabla_wrapper>.row>.col-sm-12 {
-    margin-bottom: 10px;
+.btn-success, .btn-danger, .btn-dark {
+    border-radius: 0;
 }
+
+td {
+    height: 70px;
+}
+
 .btn-success, .btn-success:hover {
     background-color: #93BE0F;
     border-color: #93BE0F;
 }
 
-.btn-success:hover {
-    color: black;
+.btn-danger, .btn-danger:hover {
+    background-color: red;
+    border-color: red;
+}
+
+.btn-dark, .btn-dark:hover {
+    background-color: #212529;
+    border-color: #212529;
+}
+
+.btn-success:hover, .btn-danger:hover, .btn-secondary:hover {
+    color: black !important;
+}
+
+.page-link {
+    color: #718096;
 }
 
 
@@ -170,23 +147,44 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control::befor
     box-shadow: none;
     border-radius: 0;
 }
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    box-shadow: 0px 0px 0px 2px rgba(170,170,170,0.4);
+}
+
+.btn-fijo {
+    width: 120px;
+}
+
+.list-group {
+    --bs-list-group-bg: transparent;
+    --bs-list-group-border-color: transparent;
+}
+
+@media (max-width: 1140px) {
+    header img {
+        width: 400px;
+        height: auto;
+    }
+}
+
 @media (max-width: 768px) {
     .single-section {
         max-width: 350px;
     }
-    .media-section {
-        height: 600px;
+    td {
+        height: 50px;
     }
-    h3 {
-        line-height: 30px;
+    tfoot {
+        display: none;
     }
-    h1 {
-        font-size: 2em;
+    header img {
+        width: 350px;
+        height: auto;
     }
-}
-
-@media (max-width: 1140px) {
-    .nav-link {
-        font-size: 1.2em;
+    .form-select {
+        margin: 10px 0 10px 0;
     }
 }

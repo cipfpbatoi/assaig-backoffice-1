@@ -30,8 +30,8 @@ class FechaUpdateRequest extends FormRequest
             'pax_espera' => 'integer',
             'horario_apertura' => 'date_format:H:i',
             'horario_cierre' => 'date_format:H:i',
-            'profesores_sala' => 'exists:profesors,id',
-            'profesores_cocina' => 'exists:profesors,id'
+            'profesores_sala' => 'required|exists:profesors,id',
+            'profesores_cocina' => 'required|exists:profesors,id'
         ];
     }
 
@@ -50,8 +50,10 @@ class FechaUpdateRequest extends FormRequest
             'horario_apertura.date_format' => 'El horario de apertura debe tener un formato válido (HH:MM).',
             'horario_cierre.required' => 'El horario de cierre es obligatorio.',
             'horario_cierre.date_format' => 'El horario de cierre debe tener un formato válido (HH:MM).',
-            'profesores_sala.exists' => 'No exixte el profesor seleccionado',
-            'profesores_cocina.exists' => 'No exixte el profesor seleccionado',
+            'profesores_sala.required' => 'Se debe seleccionar al menos un profesor de sala',
+            'profesores_sala.exists' => 'No existe el profesor seleccionado',
+            'profesores_cocina.required' => 'Se debe seleccionar al menos un profesor de cocina',
+            'profesores_cocina.exists' => 'No existe el profesor seleccionado',
         ];
     }
 }

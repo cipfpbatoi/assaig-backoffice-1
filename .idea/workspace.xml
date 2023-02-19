@@ -7,11 +7,26 @@
     <list default="true" id="1c17c6e9-0b84-4609-adce-50f64c44c340" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FechaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FechaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfesorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProfesorController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReservaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReservaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/navegation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/navegation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/FechaUpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/FechaUpdateRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/fecha/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fecha/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/fecha/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fecha/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/fecha/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fecha/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/fecha/store.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fecha/store.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/scripts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/scripts.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/profesor/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profesor/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/profesor/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profesor/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/profesor/list.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/profesor/store.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profesor/store.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/reserva/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserva/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/reserva/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserva/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/reserva/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserva/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reserva/store.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/framework/views/d21bc1965d8c501e5e18921c4eb8ea6ec1e5686e.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/d21bc1965d8c501e5e18921c4eb8ea6ec1e5686e.php" afterDir="false" />
@@ -175,7 +190,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sergi/OneDrive/2DAW/proyecto/assaig-backoffice/public/img&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sergi/OneDrive/2DAW/proyecto/assaig-backoffice/resources/views/fecha&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -185,10 +200,12 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/fecha" />
       <recent name="$PROJECT_DIR$/public/img" />
       <recent name="$PROJECT_DIR$/public/img/alergenos" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/profesor" />
       <recent name="$PROJECT_DIR$/resources/views/fecha" />
     </key>
   </component>
@@ -214,21 +231,25 @@
       <workItem from="1676558974335" duration="11094000" />
       <workItem from="1676624565119" duration="11270000" />
       <workItem from="1676645423006" duration="4179000" />
+      <workItem from="1676665727108" duration="9878000" />
+      <workItem from="1676711966478" duration="2912000" />
+      <workItem from="1676793551130" duration="11324000" />
+      <workItem from="1676823501963" duration="8300000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/fecha/index.blade.php</url>
-          <line>11</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

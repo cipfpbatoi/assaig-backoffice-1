@@ -22,7 +22,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($dates as $date)
+                @foreach($fechas as $date)
                     <tr>
                         <td>{{$date->fecha}}</td>
                         <td>{{$date->pax}}</td>
@@ -33,12 +33,12 @@
                         <td class="align-top">
                             <table>
                                 <tr>
-                                    <td class="align-top">
+                                    <td>
                                         <div>
                                             <a class="btn btn-dark btn-fijo" href="{{ route('reservas.reservasFecha', $date->id) }}">Reservas</a>
                                         </div>
                                     </td>
-                                    <td class="align-top">
+                                    <td>
                                         <div>
                                             <a class="btn btn-dark btn-fijo" href="{{ route('profesores.profesoresByFecha', $date->id) }}">Profesores</a>
                                         </div>
@@ -54,7 +54,7 @@
                                             <a class="btn btn-success btn-fijo" href="{{ route('fechas.edit', $date->id) }}">Editar</a>
                                         </div>
                                     </td>
-                                    <td class="align-top">
+                                    <td>
                                         <form action="{{route('fechas.destroy',  $date->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
                                             @csrf
                                             @method('DELETE')
@@ -80,8 +80,5 @@
                 </tr>
                 </tfoot>
             </table>
-        </div>
-        <div class="col-12">
-            <a class="btn btn-lg btn-success" href="{{ route('fechas.create') }}">Añadir Fecha</a>
         </div>
     </section>

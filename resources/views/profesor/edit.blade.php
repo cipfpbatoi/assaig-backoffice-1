@@ -1,50 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Editar Profesor</title>
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-</head>
-<body>
-@include('layout.navegation')
-<div class="container w-50 mt-5">
-    <h4 class="text-uppercase font-weight-bold">Editar Profesor</h4>
-    <form action="{{ route('profesores.update', $id) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
-        @csrf
-        @method('put')
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" class="form-control" value="{{ $profesor->nombre }}">
-            @if ($errors->has('nombre'))
-                <div class="text-danger">
-                    {{ $errors->first('nombre') }}
+@extends('layout.layout')
+@section('title', "L'assaig - " . $titulo)
+@section('content')
+    @include('partials.breadcrumb', ['breadcrumbs' => $breadcrumbs])
+    <section class="row single-section mx-auto mb-5 bg-dark p-5 text-light">
+        <div class="offset-md-1 col-md-11 col-12 my-3">
+            <h2>{{$titulo}}</h2>
+        </div>
+        <div class="col-12">
+            <form class="mt-3" action="{{ route('profesores.update', $id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+                <div class="row mb-3">
+                    <label for="nombre" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Nombre</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $profesor->nombre }}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('nombre'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('nombre') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
+                <div class="row mb-3">
+                    <label for="tipo" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Tipo</label>
+                    <div class="col-md-2 col-12">
+                        <select name="tipo" class="form-select" id="tipo">
+                            <option value="sala" @selected($profesor->tipo === 'sala')>Sala</option>
+                            <option value="cocina" @selected($profesor->tipo === 'cocina')>Cocina</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-7"></div>
+                <div class="offset-md-4 offset-lg-3 col-md-8 col-lg-9 col-12 px-md-1 px-0">
+                    <button type="submit" class="btn btn-success">Editar Profesor</button>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group mt-2">
-            <label for="tipo">Tipo</label>
-            <select name="tipo" id="tipo">
-                @if ($profesor->tipo === 'sala')
-                    <option value="sala" selected>Sala</option>
-                    <option value="cocina">Cocina</option>
-                @else
-                    <option value="sala">Sala</option>
-                    <option value="cocina" selected>Cocina</option>
-                @endif
-            </select>
-        </div>
-
-
-        <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">Editar Profesor</button>
-        </div>
-    </form>
-</div>
-
-
-
-
-</body>
-</html>
+    </section>

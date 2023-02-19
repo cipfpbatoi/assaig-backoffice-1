@@ -28,14 +28,6 @@ class ReservaController extends Controller
         ]);
         $reservas = json_decode($request)->data;
 
-        /*
-        $perPage = 10;
-        $page = request()->input('page', 1);
-        $offset = ($page * $perPage) - $perPage;
-        $data = array_slice($reservas, $offset, $perPage);
-
-        $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
-        */
         $titulo = 'Lista de Reservas';
         return view('reserva.index', compact('reservas', 'titulo', 'breadcrumbs'));
     }
@@ -156,20 +148,14 @@ class ReservaController extends Controller
             'Accept' => 'application/json',
         ]);
         $reservas = json_decode($request)->data;
-        $perPage = 10;
-        $page = request()->input('page', 1);
-        $offset = ($page * $perPage) - $perPage;
-        $data = array_slice($reservas, $offset, $perPage);
 
-        $reservasPaginadas = new LengthAwarePaginator($data, count($reservas), $perPage, $page);
-
-        $fecha = $reservasPaginadas[0]->fecha;
+        $fecha = $reservas[0]->fecha;
         $breadcrumbs = [
             ['link' => '/', 'name' => 'Home'],
             ['link' => '/reservas', 'name' => 'Reservas'],
             ['name' => 'Reservas de ' . $fecha->fecha]
         ];
         $titulo = 'Reservas para el día ' . $fecha->fecha;
-        return view('reserva.index', compact('reservasPaginadas', 'titulo', 'breadcrumbs'));
+        return view('reserva.index', compact('reservas', 'titulo', 'breadcrumbs'));
     }
 }
