@@ -15,11 +15,16 @@ class AuthenticateController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/fechas');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
             'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
         ]);
+    }
+
+    public function logout () {
+        auth()->logout();
+        return redirect('/');
     }
 }

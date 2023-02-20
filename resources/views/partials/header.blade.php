@@ -13,6 +13,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="{{route('home')}}">HOME</a>
                 </li>
+                @if(Auth::check())
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('fechas*') ? 'active' : '' }}" href="{{route('fechas.index')}}">FECHAS</a>
                 </li>
@@ -22,6 +23,14 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('profesores*') ? 'active' : '' }}" href="{{route('profesores.index')}}">PROFESORES</a>
                 </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('login*') ? 'active' : '' }}"  href="{{route('logout')}}">LOGOUT</a>
+                    </li>
+                @else
+                    <li>
+                        <a class="nav-link {{ Request::is('login*') ? 'active' : '' }}" href="{{route('login')}}">LOGIN</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>

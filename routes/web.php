@@ -25,9 +25,7 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
+Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -44,3 +42,6 @@ Route::get('/profesores-fecha/{id}', [ProfesorController::class, 'profesoresByFe
 
 
 });
+
+Route::post('/fecha-menu-add', [FechaController::class, 'add_menu'])->name('fecha.add-menu');
+Route::get('/fecha-menu-create/{id}', [FechaController::class, 'create_menu'])->name('fecha.create-menu');

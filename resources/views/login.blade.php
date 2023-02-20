@@ -1,36 +1,45 @@
-
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
-
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-sm-12 col-md-6 mx-auto d-flex justify-content-center">
-                <form action="{{ route('login') }}" class="pt-5 w-50" method="POST">
-                    @csrf
-                    @method('POST')
-                    <h3>Login del BackOffice de Assaig Restaurante de CIP FP Batoi</h3>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" class="form-control">
-
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" class="form-control">
-
-                    @if (session('errors') && session('errors')->has('email'))
-                        <div class="alert alert-danger">{{ session('errors')->first('email') }}</div>
-                    @endif
-
-                    <button type="submit" class="btn btn-primary btn-block mb-4">Enviar</button>
-                </form>
-            </div>
+@extends('layout.layout')
+@section('content')
+    <section class="row single-section my-5 mx-auto mb-5 bg-dark p-5 text-light">
+        <div class="offset-md-1 col-md-11 col-12 my-3">
+            <h2>Login</h2>
         </div>
-    </div>
-</body>
-</html>
+        <div class="col-12">
+            <form class="mt-3" action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="row mb-3">
+                    <label for="email" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Email</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') ?? ''}}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('email'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('email') }}
+                        </div>
+                    @endif
+                </div>
+                <div class="row mb-3">
+                    <label for="password" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Contraseña</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password') ?? ''}}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('password'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('password') }}
+                        </div>
+                    @endif
+                    @if (session('errors') && session('errors')->has('email'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ session('errors')->first('email') }}
+                        </div>
+                    @endif
+                </div>
+                <div class="col-md-6 col-lg-7"></div>
+                <div class="offset-md-4 offset-lg-3 col-md-8 col-lg-9 col-12 px-md-1 px-0">
+                    <button type="submit" class="btn btn-success btn-fijo">Login</button>
+                </div>
+            </form>
+        </div>
+    </section>
