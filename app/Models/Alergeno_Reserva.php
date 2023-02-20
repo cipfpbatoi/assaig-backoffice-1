@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Alergeno_Reserva extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     public function alergeno()
     {
         return $this->belongsTo(Alergeno::class, 'alergeno_id');
