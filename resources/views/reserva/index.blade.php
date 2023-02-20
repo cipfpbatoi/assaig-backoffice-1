@@ -12,12 +12,12 @@
                 <thead>
                     <tr>
                         <th class="py-3">Fecha</th>
+                        <th class="py-3">Estado</th>
                         <th class="py-3">Comensales</th>
                         <th class="py-3">Nombre</th>
                         <th class="py-3">Email</th>
                         <th class="py-3">Tel&eacute;fono</th>
                         <th class="py-3">Observaciones</th>
-                        <th class="py-3">Confirmaci&oacute;n</th>
                         <th class="py-3">Acciones</th>
                     </tr>
                 </thead>
@@ -25,22 +25,16 @@
                     @foreach($reservas as $reserva)
                         <tr>
                             <td>{{$reserva->fecha->fecha}}</td>
+                            @if($reserva->verify)
+                                <td class="px-4">Verificada</td>
+                            @else
+                                <td class="px-4 text-danger">No verificada</td>
+                            @endif
                             <td>{{$reserva->comensales}}</td>
                             <td>{{$reserva->nombre}}</td>
                             <td>{{$reserva->email}}</td>
                             <td>{{$reserva->telefono}}</td>
                             <td>{{$reserva->observaciones}}</td>
-                            @if($reserva->confirmada === 1)
-                                <td class="px-4">Confirmada</td>
-                            @else
-                                <td>
-                                    <form action="{{route('reservas.confirmar',  $reserva->id)}}" method="POST" class="justify-content-center" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-success btn-fijo">Confirmar</button>
-                                    </form>
-                                </td>
-                            @endif
                             <td class="align-top">
                                 <div>
                                     <a class="btn btn-dark btn-fijo" href="{{ route('reservas.show', $reserva->id) }}">Ver</a>
@@ -52,12 +46,12 @@
                 <tfoot>
                     <tr>
                         <th class="py-2">Fecha</th>
+                        <th class="py-2">Estado</th>
                         <th class="py-2">Comensales</th>
                         <th class="py-2">Nombre</th>
                         <th class="py-2">Email</th>
                         <th class="py-2">Tel&eacute;fono</th>
                         <th class="py-2">Observaciones</th>
-                        <th class="py-2">Confirmaci&oacute;n</th>
                         <th class="py-2">Acciones</th>
                     </tr>
                 </tfoot>

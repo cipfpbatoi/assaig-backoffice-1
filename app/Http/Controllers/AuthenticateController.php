@@ -15,7 +15,7 @@ class AuthenticateController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/fechas');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
@@ -23,14 +23,8 @@ class AuthenticateController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
+    public function logout () {
+        auth()->logout();
         return redirect('/');
     }
 }
