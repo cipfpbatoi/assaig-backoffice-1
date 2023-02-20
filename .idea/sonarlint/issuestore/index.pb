@@ -15,8 +15,6 @@ G
 -app/Http/Controllers/SuscriptorController.php,f/7/f7a188b77835b1e3fc3f0613fa4209793c00e12f
 [
 +app/Http/Controllers/AlergenoController.php,4/4/44468963c24a39c6122c96fe15856f693f4543ff
-4
-.env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 :
 
 deploy.php,0/a/0a357fad1218ea90522232e7f2fd74b26cfb52c6
