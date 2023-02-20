@@ -13,7 +13,7 @@ use Illuminate\Routing\Redirector;
 use App\Http\HttpClient;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
-
+use GuzzleHttp\Client;
 class FechaController extends Controller
 {
     /**
@@ -241,5 +241,46 @@ class FechaController extends Controller
         $titulo = 'Fechas de ' . $profesor;
 
         return view('fecha.fechas-profesor', compact('fechas', 'profesor', 'titulo', 'breadcrumbs'));
+    }
+
+    public function create_menu($id)
+    {
+        $breadcrumbs = [
+            ['link' => '/', 'name' => 'Home'],
+            ['link' => '/fechas', 'name' => 'Fechas'],
+            ['name' => 'Crear menú']
+        ];
+
+        $titulo = 'Añadir menú';
+        return view('fecha.add-menu', compact('breadcrumbs', 'titulo', 'id'));
+    }
+
+    public function add_menu(Request $request)
+    {
+        $file = $request->file('menu');
+        $fileName = $file->getClientOriginalName();
+
+        $file->storeAs('/img/menus/', $fileName);
+
+        $client = new Client();
+        $response = $client->request('POST', 'http://assaig.api/api/fecha/add-menu', [
+            'multipart' => [
+                [
+                    'name'     => 'menu',
+                    'contents' => fopen(storage_path('app/img/menus/' . $fileName), 'r'),
+                    'filename' => $fileName,
+                ],
+                [
+                    'name' => 'id',
+                    'contents' => $request->fecha_id,
+                ]
+            ],
+        ]);
+
+        if ($response->getStatusCode()=== 201) {
+            return redirect()->route('fechas.index');
+        }else{
+            return redirect()->route('home');
+        }
     }
 }

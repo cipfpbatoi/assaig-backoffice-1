@@ -15,8 +15,7 @@
                     <th class="py-3">Pax</th>
                     <th class="py-3">Overbooking</th>
                     <th class="py-3">Pax espera</th>
-                    <th class="py-3">Horario de apertura</th>
-                    <th class="py-3">Horario de cierre	</th>
+                    <th class="py-3">Horario</th>
                     <th class="py-3">Informaci&oacute;n</th>
                     <th class="py-3">Acciones</th>
                 </tr>
@@ -28,8 +27,7 @@
                         <td>{{$date->pax}}</td>
                         <td>{{$date->overbooking}}</td>
                         <td>{{$date->pax_espera}}</td>
-                        <td>{{$date->horario_apertura}}</td>
-                        <td>{{$date->horario_cierre}}</td>
+                        <td>{{$date->horario_apertura}} - {{$date->horario_cierre}}</td>
                         <td class="align-top">
                             <table>
                                 <tr>
@@ -55,6 +53,13 @@
                                         </div>
                                     </td>
                                     <td class="align-top">
+                                        @if(!$date->menu)
+                                            <a class="btn btn-success btn-fijo" href="{{ route('fecha.create-menu', $date->id) }}">Subir menú</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-top">
                                         <form action="{{route('fechas.destroy',  $date->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
                                             @csrf
                                             @method('DELETE')
@@ -73,8 +78,7 @@
                     <th class="py-3">Pax</th>
                     <th class="py-3">Overbooking</th>
                     <th class="py-3">Pax espera</th>
-                    <th class="py-3">Horario de apertura</th>
-                    <th class="py-3">Horario de cierre	</th>
+                    <th class="py-3">Horario</th>
                     <th class="py-3">Informaci&oacute;n</th>
                     <th class="py-3">Acciones</th>
                 </tr>
