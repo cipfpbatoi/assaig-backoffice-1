@@ -2,8 +2,8 @@
 <?php $__env->startSection('content'); ?>
     <section class="row single-section mx-auto my-5 bg-light g-0">
         <div class="col-12 text-center bg-dark text-light p-5">
-            <h2><span class="text-light">L</span>'<span class="text-light">assaig</span></h2>
-            <h3>Bienvenido a la aplicaci&oacute;n del restaurante L'assaig</h3>
+            <h1><span class="text-light">L</span>'<span class="text-light">assaig</span></h1>
+            <h2>Bienvenido a la aplicaci&oacute;n del restaurante L'assaig</h2>
         </div>
         <div class="col-12 text-center my-auto">
             <div class="row">

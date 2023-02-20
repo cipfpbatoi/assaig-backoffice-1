@@ -1,53 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de profesores</title>
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-</head>
-<body>
-@include('layout.navegation')
-<h1 class="text-uppercase font-weight-bold">Lista de profesores</h1>
-<div class="container">
-    <table class="rounded shadow-lg table m-2 table-striped table-hover table-bordered text-center">
-        <tr class="table-primary">
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Información</th>
-            <th>Acción</th>
-        </tr>
-        @foreach($datosPaginados as $profesor)
-            <tr>
-                <td>{{$profesor->nombre}}</td>
-                <td>{{$profesor->tipo}}</td>
-                <td>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesor.profesoresByFechas', $profesor->id) }}">Ver Fechas</a>
-                </td>
-                <td>
-                    <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.edit', $profesor->id) }}">Editar</a>
-
-                    <form action="{{route('profesores.destroy',  $profesor->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-primary text-center">Borrar</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-
-    </table>
-    <a class="btn btn-primary text-center mb-3" href="{{ route('profesores.create') }}">Añadir Profesor</a>
-    <div class="paginator d-flex justify-content-center my-3">
-        @if(!$datosPaginados->onFirstPage())
-            <a href="/profesores{{ $datosPaginados->previousPageUrl() }}" class="btn btn-primary">Anterior</a>
-        @endif
-        <span class="current-page mx-5">Pagina {{$datosPaginados->currentPage()}} de {{$datosPaginados->lastPage()}}</span>
-
-        @if($datosPaginados->hasMorePages())
-            <a href="/profesores{{ $datosPaginados->nextPageUrl() }}" class="btn btn-primary">Siguiente</a>
-        @endif
+@extends('layout.layout')
+@section('title', "L'assaig - " . $titulo)
+@section('content')
+    @include('partials.breadcrumb', ['breadcrumbs' => $breadcrumbs])
+    <div class="row single-section mx-auto my-5 g-0">
+        <h1>{{$titulo}}</h1>
     </div>
-</div>
-</body>
-</html>
+    <section class="row single-section mx-auto my-5 g-0">
+        <div class="col-12 py-5">
+            <table class="tabla table table-secondary table-hover table-striped align-middle
+             dt-responsive nowrap py-3" style="width:100%">
+                <thead>
+                <tr>
+                    <th class="py-3">Nombre</th>
+                    <th class="py-3">Tipo</th>
+                    <th class="py-3">Fechas</th>
+                    <th class="py-3">Aciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($profesores as $profesor)
+                    <tr>
+                        <td>{{$profesor->nombre}}</td>
+                        <td>{{$profesor->tipo}}</td>
+                        <td class="align-top">
+                            <div>
+                                <a class="btn btn-dark btn-fijo" href="{{ route('fechas.fechasByProfesor', $profesor->id) }}">Ver</a>
+                            </div>
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td class="align-top">
+                                        <div>
+                                            <a class="btn btn-success btn-fijo" href="{{ route('profesores.edit', $profesor->id) }}">Editar</a>
+                                        </div>
+                                    </td>
+                                    <td class="align-top">
+                                        <form action="{{route('profesores.destroy',  $profesor->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-fijo">Borrar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th class="py-3">Nombre</th>
+                    <th class="py-3">Tipo</th>
+                    <th class="py-3">Fechas</th>
+                    <th class="py-3">Aciones</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-12">
+            <a class="btn btn-lg btn-success" href="{{ route('profesores.create') }}">Añadir Profesor</a>
+        </div>
+    </section>

@@ -22,7 +22,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($dates as $date)
+                @foreach($fechas as $date)
                     <tr>
                         <td>{{$date->fecha}}</td>
                         <td>{{$date->pax}}</td>
@@ -80,8 +80,5 @@
                 </tr>
                 </tfoot>
             </table>
-        </div>
-        <div class="col-12">
-            <a class="btn btn-lg btn-success" href="{{ route('fechas.create') }}">Añadir Fecha</a>
         </div>
     </section>

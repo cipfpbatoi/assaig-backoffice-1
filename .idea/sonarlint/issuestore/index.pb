@@ -11,41 +11,19 @@ d
 4app/Http/Controllers/ProfesorFechaSalaController.php,a/5/a5ec844d7d8662f128cad469777e3f9626efd3f1
 G
 app/Http/HttpClient.php,4/f/4f2e0b770c8e06ac2ba9edaa63d916016d09ae7e
-X
-(resources/views/profesor/index.blade.php,0/f/0fedd50fb8b5a6ea5639248823b4809accb1112c
 ]
 -app/Http/Controllers/SuscriptorController.php,f/7/f7a188b77835b1e3fc3f0613fa4209793c00e12f
 [
 +app/Http/Controllers/AlergenoController.php,4/4/44468963c24a39c6122c96fe15856f693f4543ff
-W
-'resources/views/reserva/store.blade.php,c/0/c0856b4e37713eb9536f149d70074be7abf9ca1b
-W
-'resources/views/profesor/edit.blade.php,1/1/117cf536afa757372f90c45f41080287c32b7b53
-X
-(resources/views/profesor/store.blade.php,e/2/e21be00f33393ecaeff5c982e2e757451d3532ed
-[
-+app/Http/Controllers/ProfesorController.php,b/4/b4aa067ba92d318c1377d3ef985a36778e5b1f31
-U
-%resources/views/fecha/index.blade.php,0/8/08a06c0d02052e522f83868f3fbf065ef10e6109
-U
-%resources/views/fecha/store.blade.php,3/b/3b1823889b9115efd79688a52d812d012863d6b7
-T
-$resources/views/fecha/edit.blade.php,c/6/c6699312aaed1c41a3437f63de4ad3753fe5853a
 4
 .env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 :
 
 deploy.php,0/a/0a357fad1218ea90522232e7f2fd74b26cfb52c6
-X
-(app/Http/Controllers/FechaController.php,9/1/919b7f4e07eab8c0e3a841a9688cfa3113f5992b
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-T
-$app/Http/Requests/ReservaRequest.php,7/b/7b4cde85e0c22dfe3458a87ea8e568e0ed292265
+O
+resources/views/login.blade.php,9/7/9764e258672f24aae945b82aeb09dba30b278f68
 E
 resources/css/app.css,f/b/fb832949a8835b7bba860cb482ee63cd29bba09b
-[
-+resources/views/layout/navegation.blade.php,3/3/3369bc8050ed3a88c53af6e9ff64ba384cd26ebb
-]
--resources/views/partials/breadcrumb.blade.php,1/a/1aef0b13b90ff3e2ad342b4b9ff8ae013f92f6b6

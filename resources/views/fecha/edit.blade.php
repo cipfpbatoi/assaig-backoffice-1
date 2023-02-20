@@ -1,118 +1,128 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit de Fechas</title>
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-</head>
-<body>
-@include('layout.navegation')
-<div class="container">
-    <h4 class="text-uppercase font-weight-bold">Editado de la Fecha {{ $fecha->fecha }}</h4>
-    <form action="{{ route('fechas.update', $fecha->id) }}" method="POST" enctype="multipart/form-data" class="border border-primary rounded shadow-lg p-3">
-        @csrf
-        @method('put')
-        <div class="form-group">
-            <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" id="fecha" class="form-control" value="{{ $fecha->fecha }}">
-            @if ($errors->has('fecha'))
-                <div class="text-danger">
-                    {{ $errors->first('fecha') }}
-                </div>
-            @endif
+@extends('layout.layout')
+@section('title', "L'assaig - " . $titulo)
+@section('content')
+    @include('partials.breadcrumb', ['breadcrumbs' => $breadcrumbs])
+    <section class="row single-section mx-auto mb-5 bg-dark p-5 text-light">
+        <div class="offset-md-1 col-md-11 col-12 my-3">
+            <h2>{{$titulo}}</h2>
         </div>
-
-        <div class="form-group">
-            <label for="pax">Pax</label>
-            <input type="number" name="pax" id="pax" class="form-control" value="{{ $fecha->pax }}">
-            @if ($errors->has('pax'))
-                <div class="text-danger">
-                    {{ $errors->first('pax') }}
+        <div class="col-12">
+            <form class="mt-3" action="{{ route('fechas.update', $fecha->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+                <div class="row mb-3">
+                    <label for="fecha" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Fecha</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="date" class="form-control" id="fecha" name="fecha" value="{{ $fecha->fecha }}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('fecha'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('fecha') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
-
-        <div class="form-group">
-            <label for="overbooking">Overbooking</label>
-            <input type="number" name="overbooking" id="overbooking" class="form-control" value="{{ $fecha->overbooking }}">
-            @if ($errors->has('overbooking'))
-                <div class="text-danger">
-                    {{ $errors->first('overbooking') }}
+                <div class="row mb-3">
+                    <label for="pax" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Pax</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="number" class="form-control" id="pax" name="pax" value="{{ $fecha->pax }}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('pax'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('pax') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
-
-        <div class="form-group">
-            <label for="pax_espera">Pax Esperada</label>
-            <input type="number" name="pax_espera" id="pax_espera" class="form-control" value="{{ $fecha->pax_espera }}">
-            @if ($errors->has('pax_espera'))
-                <div class="text-danger">
-                    {{ $errors->first('pax_espera') }}
+                <div class="row mb-3">
+                    <label for="overbooking" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Overbooking</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="number" class="form-control" id="overbooking" name="overbooking" value="{{ $fecha->overbooking }}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('overbooking'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('overbooking') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
-
-        <div class="form-group">
-            <label for="horario_apertura">Horario de Apertura</label>
-            <input type="time" name="horario_apertura" id="horario_apertura" class="form-control" value="{{ $horarioApertura }}">
-            @if ($errors->has('horario_apertura'))
-                <div class="text-danger">
-                    {{ $errors->first('horario_apertura') }}
+                <div class="row mb-3">
+                    <label for="pax_espera" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Pax espera</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="number" class="form-control" id="pax_espera" name="pax_espera" value="{{ $fecha->pax_espera }}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('pax_espera'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('pax_espera') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
-
-        <div class="form-group">
-            <label for="horario_cierre">Horario de Cierre</label>
-            <input type="time" name="horario_cierre" id="horario_cierre" class="form-control" value="{{ $horarioCierre }}">
-            @if ($errors->has('horario_cierre'))
-                <div class="text-danger">
-                    {{ $errors->first('horario_cierre') }}
+                <div class="row mb-3">
+                    <label for="horario_apertura" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Horario de apertura</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="time" class="form-control" id="horario_apertura" name="horario_apertura" value="{{ $horarioApertura }}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('horario_apertura'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('horario_apertura') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
-
-        <div class="form-group">
-            <label for="horario_cierre">Profesores Sala</label>
-            @foreach ($profesorSala as $profesor)
-                <div>
-                    <label>
-                        <input type="checkbox"
-                               name="profesores_sala[]"
-                               value="{{ $profesor->id }}"
-                           @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
-                               checked
-                            @endif
-                        >
-                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
-                    </label>
+                <div class="row mb-3">
+                    <label for="horario_cierre" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Horario de cierre</label>
+                    <div class="col-md-6 col-lg-7 col-12">
+                        <input type="time" class="form-control" id="horario_cierre" name="horario_cierre" value="{{ $horarioCierre }}">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @if ($errors->has('horario_cierre'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('horario_cierre') }}
+                        </div>
+                    @endif
                 </div>
-            @endforeach
-    <br>
-            <label for="horario_cierre">Profesores Cocina</label>
-            @foreach ($profesorCocina as $profesor)
-                <div>
-                    <label>
-                        <input type="checkbox"
-                               name="profesores_cocina[]"
-                               value="{{ $profesor->id }}"
-                               @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
-                                   checked
-                            @endif
-                        >
-                        {{ $profesor->nombre }} - {{ $profesor->tipo }}
-                    </label>
+                <div class="row mb-3">
+                    <label for="profesores_sala" class="form-label offset-md-2 col-md-10 col-12">Profesores de sala</label>
+                    @foreach ($profesoresSala as $profesor)
+                        <div class="offset-md-3 col-md-7 col-12">
+                            <label>
+                                <input type="checkbox" name="profesores_sala[]" value="{{ $profesor->id }}"
+                                       @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
+                                           checked
+                                    @endif>
+                                {{ $profesor->nombre }} - {{ $profesor->tipo }}
+                            </label>
+                        </div>
+                        <div class="col-md-2"></div>
+                    @endforeach
+                    @if ($errors->has('profesores_sala'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('profesores_sala') }}
+                        </div>
+                    @endif
                 </div>
-            @endforeach
-
+                <div class="row mb-3">
+                    <label for="profesores_cocina" class="form-label offset-md-2 col-md-2 col-12">Profesores de cocina</label>
+                    @foreach ($profesoresCocina as $profesor)
+                        <div class="offset-md-3 col-md-7 col-12">
+                            <input type="checkbox" name="profesores_cocina[]" value="{{ $profesor->id }}"
+                                   @if(in_array($profesor->nombre, $profesoresSalaNombres) || in_array($profesor->nombre, $profesoresCocinaNombres))
+                                       checked
+                                @endif>
+                            {{ $profesor->nombre }} - {{ $profesor->tipo }}
+                        </div>
+                        <div class="col-md-2"></div>
+                    @endforeach
+                    @if ($errors->has('profesores_cocina'))
+                        <div class="offset-md-3 col-md-9 col-12 text-danger">
+                            {{ $errors->first('profesores_cocina') }}
+                        </div>
+                    @endif
+                </div>
+                <div class="offset-md-4 offset-lg-3 col-md-8 col-lg-9 col-12 px-md-1 px-0">
+                    <button type="submit" class="btn btn-success btn-fijo">Editar</button>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">Editar</button>
-        </div>
-    </form>
-</div>
-
-</body>
-</html>
+    </section>

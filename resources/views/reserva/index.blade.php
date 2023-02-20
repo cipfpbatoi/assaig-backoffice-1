@@ -3,11 +3,11 @@
 @section('content')
     @include('partials.breadcrumb', ['breadcrumbs' => $breadcrumbs])
     <div class="row single-section mx-auto my-5 g-0">
-        <h1 class="text-uppercase font-weight-bold">{{$titulo}}</h1>
+        <h1>{{$titulo}}</h1>
     </div>
     <section class="row single-section mx-auto my-5 g-0">
         <div class="col-12 py-5">
-            <table id="tabla" class="table table-secondary table-hover table-striped align-middle
+            <table class="tabla table table-secondary table-hover table-striped align-middle
              dt-responsive nowrap py-3" style="width:100%">
                 <thead>
                     <tr>
@@ -31,19 +31,20 @@
                             <td>{{$reserva->telefono}}</td>
                             <td>{{$reserva->observaciones}}</td>
                             @if($reserva->confirmada === 1)
-                                <td>Confirmada</td>
+                                <td class="px-4">Confirmada</td>
                             @else
                                 <td>
-                                    <p>Pendiente</p>
                                     <form action="{{route('reservas.confirmar',  $reserva->id)}}" method="POST" class="justify-content-center" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-success">Confirmar</button>
+                                        <button type="submit" class="btn btn-success btn-fijo">Confirmar</button>
                                     </form>
                                 </td>
                             @endif
-                            <td>
-                                <a class="btn btn-secondary" href="{{ route('reservas.show', $reserva->id) }}">Ver Mas</a>
+                            <td class="align-top">
+                                <div>
+                                    <a class="btn btn-dark btn-fijo" href="{{ route('reservas.show', $reserva->id) }}">Ver</a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
