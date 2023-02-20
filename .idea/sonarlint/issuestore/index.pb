@@ -25,7 +25,5 @@ deploy.php,0/a/0a357fad1218ea90522232e7f2fd74b26cfb52c6
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 O
 resources/views/login.blade.php,9/7/9764e258672f24aae945b82aeb09dba30b278f68
-Z
-*resources/views/partials/scripts.blade.php,e/2/e28c349053e960c5c4af63028aa581b7794ef56d
 E
 resources/css/app.css,f/b/fb832949a8835b7bba860cb482ee63cd29bba09b

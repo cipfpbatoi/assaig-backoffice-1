@@ -33,12 +33,12 @@
                         <td class="align-top">
                             <table>
                                 <tr>
-                                    <td>
+                                    <td class="align-top">
                                         <div>
                                             <a class="btn btn-dark btn-fijo" href="{{ route('reservas.reservasFecha', $date->id) }}">Reservas</a>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="align-top">
                                         <div>
                                             <a class="btn btn-dark btn-fijo" href="{{ route('profesores.profesoresByFecha', $date->id) }}">Profesores</a>
                                         </div>
@@ -54,7 +54,7 @@
                                             <a class="btn btn-success btn-fijo" href="{{ route('fechas.edit', $date->id) }}">Editar</a>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="align-top">
                                         <form action="{{route('fechas.destroy',  $date->id)}}" method="POST" class="justify-content-center mb-3" enctype="multipart/form-data">
                                             @csrf
                                             @method('DELETE')
