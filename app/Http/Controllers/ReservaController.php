@@ -9,6 +9,7 @@ use App\Http\HttpClient;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 
+const SERVER = 'http://api.saar.alcoitec.es/';
 class ReservaController extends Controller
 {
     /**
@@ -23,7 +24,7 @@ class ReservaController extends Controller
             ['name' => 'Reservas']
         ];
 
-        $request = $httpClient->get('http://assaig.api/api/reservas', [
+        $request = $httpClient->get(SERVER . 'api/reservas', [
             'Accept' => 'application/json',
         ]);
         $reservas = json_decode($request)->data;
@@ -61,7 +62,7 @@ class ReservaController extends Controller
      */
     public function show(HttpClient $httpClient, $id)
     {
-        $reserva = $httpClient->get('http://assaig.api/api/reservas/' . $id, [
+        $reserva = $httpClient->get(SERVER . 'api/reservas/' . $id, [
             'Accept' => 'application/json',
         ]);
         $reserva = json_decode($reserva)->data;
@@ -111,7 +112,7 @@ class ReservaController extends Controller
 
     public function confirmar(HttpClient $httpClient, $id)
     {
-        if ($httpClient->get('http://assaig.api/api/confirmar-reserva/' . $id)) {
+        if ($httpClient->get(SERVER . 'api/confirmar-reserva/' . $id)) {
             return redirect()->route('reservas.index');
         } else {
             echo "Error al realizar la solicitud PUT";
@@ -120,7 +121,7 @@ class ReservaController extends Controller
 
     public function pendientes(HttpClient $httpClient)
     {
-        $request = $httpClient->get('http://assaig.api/api/reservas-pendientes', [
+        $request = $httpClient->get(SERVER . 'api/reservas-pendientes', [
             'Accept' => 'application/json',
         ]);
         $reservas = json_decode($request)->data;
@@ -144,7 +145,7 @@ class ReservaController extends Controller
 
     public function reservasFecha(HttpClient $httpClient, $fechaId)
     {
-        $request = $httpClient->get('http://assaig.api/api/reservas-fecha/' . $fechaId, [
+        $request = $httpClient->get(SERVER . 'api/reservas-fecha/' . $fechaId, [
             'Accept' => 'application/json',
         ]);
         $reservas = json_decode($request)->data;

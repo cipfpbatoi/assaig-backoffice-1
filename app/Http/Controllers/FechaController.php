@@ -14,6 +14,8 @@ use App\Http\HttpClient;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+
+const SERVER = 'http://api.saar.alcoitec.es/';
 class FechaController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class FechaController extends Controller
      */
     public function index(HttpClient $httpClient)
     {
-        $datos = $httpClient->get('http://assaig.api/api/fechas', [
+        $datos = $httpClient->get(SERVER . 'api/fechas', [
             'Accept' => 'application/json',
         ]);
         $dates = json_decode($datos)->data;
@@ -45,7 +47,7 @@ class FechaController extends Controller
      */
     public function create(HttpClient $httpClient)
     {
-        $profesores = $httpClient->get('http://assaig.api/api/profesores', [
+        $profesores = $httpClient->get(SERVER . 'api/profesores', [
             'Accept' => 'application/json',
         ]);
         $profesores = json_decode($profesores)->data;
@@ -78,7 +80,7 @@ class FechaController extends Controller
      */
     public function store(FechaUpdateRequest $request)
     {
-        $response = Http::asForm()->post('http://assaig.api/api/fechas', [
+        $response = Http::asForm()->post(SERVER . 'api/fechas', [
             'fecha'=>$request->fecha,
             'pax'=>$request->pax,
             'overbooking'=>$request->overbooking,
@@ -104,7 +106,7 @@ class FechaController extends Controller
      */
     public function show(HttpClient $httpClient, Fecha $fecha)
     {
-        $fecha = $httpClient->get('http://assaig.api/api/fechas/' . $fecha->id, [
+        $fecha = $httpClient->get(SERVER . 'api/fechas/' . $fecha->id, [
             'Accept' => 'application/json',
         ]);
         $fecha = json_decode($fecha)->data;
@@ -127,7 +129,7 @@ class FechaController extends Controller
      */
     public function edit(HttpClient $httpClient, Fecha $fecha)
     {
-        $fecha = $httpClient->get('http://assaig.api/api/fechas/' . $fecha->id, [
+        $fecha = $httpClient->get(SERVER . 'api/fechas/' . $fecha->id, [
             'Accept' => 'application/json',
         ]);
         $fecha = json_decode($fecha)->data;
@@ -139,7 +141,7 @@ class FechaController extends Controller
         $horarioCierre = Carbon::parse($horarioCierre);
         $horarioCierre = $horarioCierre->format('H:i');
 
-        $profesores = $httpClient->get('http://assaig.api/api/profesores', [
+        $profesores = $httpClient->get(SERVER . 'api/profesores', [
             'Accept' => 'application/json',
         ]);
         $profesores = json_decode($profesores)->data;
@@ -180,7 +182,7 @@ class FechaController extends Controller
      */
     public function update(FechaUpdateRequest $request, $fechaId)
     {
-        $response = Http::asForm()->put('http://assaig.api/api/fechas/' . $fechaId, [
+        $response = Http::asForm()->put(SERVER . 'api/fechas/' . $fechaId, [
             'fecha'=>$request->fecha,
             'pax'=>$request->pax,
             'overbooking'=>$request->overbooking,
@@ -205,7 +207,7 @@ class FechaController extends Controller
      */
     public function destroy(Fecha $fecha)
     {
-        $response = Http::delete('http://assaig.api/api/fechas/' . $fecha->id, (array)$fecha);
+        $response = Http::delete(SERVER . 'api/fechas/' . $fecha->id, (array)$fecha);
         if ($response->status()=== 204) {
             return redirect()->route('fechas.index');
         }else{
@@ -222,7 +224,7 @@ class FechaController extends Controller
      */
     public function fechasByProfesor(HttpClient $httpClient, $profesorId)
     {
-        $request = $httpClient->get('http://assaig.api/api/profesores/' . $profesorId, [
+        $request = $httpClient->get(SERVER . 'api/profesores/' . $profesorId, [
             'Accept' => 'application/json',
         ]);
         $profesor = json_decode($request)->data;
@@ -263,7 +265,7 @@ class FechaController extends Controller
         $file->storeAs('/img/menus/', $fileName);
 
         $client = new Client();
-        $response = $client->request('POST', 'http://assaig.api/api/fecha/add-menu', [
+        $response = $client->request('POST', SERVER . 'api/fecha/add-menu', [
             'multipart' => [
                 [
                     'name'     => 'menu',
