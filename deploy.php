@@ -22,7 +22,7 @@ add('writable_dirs', []);
 
 // Hosts
 // De momento se debe cambiar el host con el DNS del servidor PHP cada vez que éste cambie
-host('ec2-34-207-188-32.compute-1.amazonaws.com')
+host('ec2-54-144-158-85.compute-1.amazonaws.com')
     ->user('backoffice_dev')
     ->identityFile('~/.ssh/id_rsa.pub')
     ->set('deploy_path', '/var/www/assaig-backoffice/html');
@@ -45,12 +45,12 @@ after('deploy:failed', 'deploy:unlock');
 
 //before('deploy:symlink', 'artisan:migrate:fresh');
 
-/*
+
 task('composer:update', function (){
-    //run('cd /var/www/assaig-backoffice/html/current && sudo apt install php8.1-intl');
+    run('cd /var/www/assaig-backoffice/html/current && sudo apt install php8.1-intl');
     run('cd /var/www/assaig-backoffice/html/current && composer update');
-    run('cd /var/www/assaig-backoffice/html/current && php artisan db:seed');
-});*/
+    //run('cd /var/www/assaig-backoffice/html/current && php artisan db:seed');
+});
 
 task('reload:php-fpm', function(){
     run('sudo /etc/init.d/php8.1-fpm restart');
@@ -64,11 +64,11 @@ task('artisan:queue:work', function () {
     run('cd /var/www/assaig-backoffice/html/current && php artisan queue:work --queue=default --tries=3');
 });
 
-// after('deploy', 'composer:update');
-/*
+after('deploy', 'composer:update');
+
 after('deploy', 'reload:php-fpm');
 
 after('deploy', 'rsync_function');
 
-after('deploy', 'artisan:queue:work');*/
+//after('deploy', 'artisan:queue:work');
 
