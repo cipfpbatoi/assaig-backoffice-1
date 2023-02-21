@@ -23,9 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('profesores*') ? 'active' : '' }}" href="{{route('profesores.index')}}">PROFESORES</a>
                 </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('login*') ? 'active' : '' }}"  href="{{route('logout')}}">LOGOUT</a>
-                    </li>
+                <li>
+                    <a class="nav-link {{ Request::is('logout*') ? 'active' : '' }}"  href="{{route('logout-post')}}">LOGOUT</a>
+                </li>
                 @else
                     <li>
                         <a class="nav-link {{ Request::is('login*') ? 'active' : '' }}" href="{{route('login')}}">LOGIN</a>
