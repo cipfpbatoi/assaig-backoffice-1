@@ -24,9 +24,9 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout-post');
 
-Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
+Route::post('/login', [AuthenticateController::class, 'login'])->name('login-post');
 Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:sanctum')->group(function () {

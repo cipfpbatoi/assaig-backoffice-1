@@ -5,7 +5,7 @@
             <h2>Login</h2>
         </div>
         <div class="col-12">
-            <form class="mt-3" action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
+            <form class="mt-3" action="{{ route('login-post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
                     <label for="email" class="form-label offset-md-2 col-md-2 col-lg-1 col-12">Email</label>
