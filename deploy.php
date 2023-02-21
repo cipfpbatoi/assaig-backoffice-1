@@ -71,4 +71,4 @@ after('deploy', 'reload:php-fpm');
 after('deploy', 'rsync_function');
 
 after('deploy', 'artisan:queue:work');*/
-/*
+
