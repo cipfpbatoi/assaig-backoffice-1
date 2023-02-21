@@ -7,6 +7,8 @@ use App\Models\Alergeno;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+const SERVER = 'http://api.saar.alcoitec.es/';
+
 class AlergenoController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class AlergenoController extends Controller
      */
     public function index(HttpClient $httpClient)
     {
-        $datos = $httpClient->get('http://assaig.api/api/alergenos', [
+        $datos = $httpClient->get(SERVER . 'api/alergenos', [
             'Accept' => 'application/json',
         ]);
         $datos = json_decode($datos)->data;

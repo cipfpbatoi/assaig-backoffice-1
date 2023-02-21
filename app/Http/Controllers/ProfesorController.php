@@ -11,6 +11,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 
+const SERVER = 'http://api.saar.alcoitec.es/';
 class ProfesorController extends Controller
 {
     /**
@@ -20,7 +21,7 @@ class ProfesorController extends Controller
      */
     public function index(HttpClient $httpClient)
     {
-        $datos = $httpClient->get('http://assaig.api/api/profesores', [
+        $datos = $httpClient->get(SERVER . 'api/profesores', [
             'Accept' => 'application/json',
         ]);
         $profesores = json_decode($datos)->data;
@@ -60,7 +61,7 @@ class ProfesorController extends Controller
     public function store(ProfesorRequest $request)
     {
 
-        $response = Http::asForm()->post('http://assaig.api/api/profesores', $request);
+        $response = Http::asForm()->post(SERVER . 'api/profesores', $request);
         if ($response->status()=== 201) {
             return redirect()->route('profesores.index');
         }else{
@@ -76,7 +77,7 @@ class ProfesorController extends Controller
      */
     public function show(HttpClient $httpClient, Profesor $profesor)
     {
-        $profesor = $httpClient->get('http://assaig.api/api/profesores/' . $profesor->id, [
+        $profesor = $httpClient->get(SERVER . 'api/profesores/' . $profesor->id, [
             'Accept' => 'application/json',
         ]);
         $profesor = json_decode($profesor)->data;
@@ -114,7 +115,7 @@ class ProfesorController extends Controller
      */
     public function update(ProfesorRequest $request, $profesor)
     {
-        $response = Http::put('http://assaig.api/api/profesores/'.$profesor, [
+        $response = Http::put(SERVER . 'api/profesores/'.$profesor, [
             'nombre'=>$request->nombre,
             'tipo'=>$request->tipo
         ]);
@@ -144,7 +145,7 @@ class ProfesorController extends Controller
 
     public function profesoresByFecha(HttpClient $httpClient, $fechaId)
     {
-        $request = $httpClient->get('http://assaig.api/api/fechas/' . $fechaId, [
+        $request = $httpClient->get(SERVER . 'api/fechas/' . $fechaId, [
             'Accept' => 'application/json',
         ]);
         $fecha = json_decode($request)->data;
