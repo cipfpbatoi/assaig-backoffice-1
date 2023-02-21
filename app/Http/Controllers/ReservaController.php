@@ -149,8 +149,8 @@ class ReservaController extends Controller
             'Accept' => 'application/json',
         ]);
         $reservas = json_decode($request)->data;
-
-        $fecha = $reservas[0]->fecha;
+        $fecha = $httpClient->get(SERVER . 'api/fechas/' . $fechaId);
+        //$fecha = $reservas[0]->fecha;
         $breadcrumbs = [
             ['link' => '/', 'name' => 'Home'],
             ['link' => '/reservas', 'name' => 'Reservas'],
