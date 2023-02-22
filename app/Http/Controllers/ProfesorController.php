@@ -92,7 +92,7 @@ class ProfesorController extends Controller
      */
     public function edit(HttpClient $httpClient, $id)
     {
-        $profesor = $httpClient->get('http://assaig.api/api/profesores/' . $id, [
+        $profesor = $httpClient->get(SERVER . 'api/profesores/' . $id, [
             'Accept' => 'application/json',
         ]);
         $profesor = json_decode($profesor)->data;
@@ -135,7 +135,7 @@ class ProfesorController extends Controller
      */
     public function destroy($profesorId)
     {
-        $response = Http::delete('http://assaig.api/api/profesores/' . $profesorId, $profesorId);
+        $response = Http::delete(SERVER . 'api/profesores/' . $profesorId, $profesorId);
         if ($response->status()=== 204) {
             return redirect()->route('profesores.index');
         }else{
