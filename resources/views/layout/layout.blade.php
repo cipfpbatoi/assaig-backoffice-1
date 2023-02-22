@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
-    <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}">
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <link rel="stylesheet" href="/css/estilos.css">
 </head>
 <body class="container-fluid">
