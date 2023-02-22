@@ -57,7 +57,7 @@ task('reload:php-fpm', function(){
 });
 
 task('rsync_function', function (){
-    run('rsync -avz -e "ssh -i /home/backoffice_dev/.ssh/nginx" --include="*.html" --include="*.css" --include="*.jpg" --include="*.jpeg" --include="*.png" --exclude="*" /var/www/assaig-backoffice/html backoffice_dev@54.85.146.153:/var/www/assaig-backoffice/');
+    run('rsync -avz -e "ssh -i /home/backoffice_dev/.ssh/nginx" --include="*.html" --include="*.css" --include="*.jpg" --include="*.jpeg" --include="*.png" --include="*.ico" --exclude="*" /var/www/assaig-backoffice/html backoffice_dev@54.85.146.153:/var/www/assaig-backoffice/');
 });
 
 task('artisan:queue:work', function () {
