@@ -229,7 +229,7 @@ class FechaController extends Controller
         ]);
         $profesor = json_decode($request)->data;
         $profesor = $profesor->nombre;
-        $request = $httpClient->get('http://assaig.api/api/fechas-profesor/' . $profesorId, [
+        $request = $httpClient->get(SERVER . 'api/fechas-profesor/' . $profesorId, [
             'Accept' => 'application/json',
         ]);
         $fechas = json_decode($request)->data;
