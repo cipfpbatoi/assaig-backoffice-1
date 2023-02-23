@@ -23,7 +23,7 @@ add('writable_dirs', []);
 
 // Hosts
 // De momento se debe cambiar el host con el DNS del servidor PHP cada vez que éste cambie
-host('ec2-54-236-47-156.compute-1.amazonaws.com')
+host('ec2-54-160-81-106.compute-1.amazonaws.com')
     ->user('backoffice_dev')
     ->identityFile('~/.ssh/id_rsa.pub')
     ->set('deploy_path', '/var/www/assaig-backoffice/html');
@@ -58,7 +58,7 @@ task('reload:php-fpm', function(){
 });
 
 task('rsync_function', function (){
-    run('rsync -avz -e "ssh -i /home/backoffice_dev/.ssh/nginx" --include="*.html" --include="*.css" --include="*.jpg" --include="*.jpeg" --include="*.png" --include="*.ico" --exclude="*.php" /var/www/assaig-backoffice/html backoffice_dev@54.85.146.153:/var/www/assaig-backoffice/');
+    run('rsync -avz -e "ssh -i /home/backoffice_dev/.ssh/nginx" /var/www/assaig-backoffice/html backoffice_dev@54.85.146.153:/var/www/assaig-backoffice/');
 });
 
 task('artisan:queue:work', function () {
