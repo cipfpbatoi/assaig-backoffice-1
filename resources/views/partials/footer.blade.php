@@ -1,4 +1,4 @@
-<footer class="row text-center p-3 bg-dark text-center text-white mt-5">
+<footer class="row text-center p-3 bg-dark text-center text-white">
     <div class="col-md-8 col-12 text-md-start text-center">
         © L'assaig 2023 | Todos los derechos reservados.
     </div>
