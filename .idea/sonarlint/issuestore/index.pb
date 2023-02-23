@@ -15,8 +15,6 @@ X
 (resources/views/profesor/index.blade.php,0/f/0fedd50fb8b5a6ea5639248823b4809accb1112c
 W
 'resources/views/profesor/edit.blade.php,1/1/117cf536afa757372f90c45f41080287c32b7b53
-Z
-*resources/views/partials/scripts.blade.php,e/2/e28c349053e960c5c4af63028aa581b7794ef56d
 T
 $resources/views/fecha/show.blade.php,d/c/dc7d7c78d54ce17a3c6ce1f36d1a21c96cc84989
 U
@@ -31,7 +29,3 @@ X
 (resources/views/fecha/add-menu.blade.php,2/e/2e1ffccd8692da16c1aa990e8f2ad7c092b8ef21
 ]
 -resources/views/partials/breadcrumb.blade.php,1/a/1aef0b13b90ff3e2ad342b4b9ff8ae013f92f6b6
-Y
-)resources/views/partials/footer.blade.php,0/3/034a5ac96a1906205cc5c3b2090d301bc83944e0
-Y
-)resources/views/partials/header.blade.php,b/2/b2a979fec1d16f26cd4a8431a33df311e1461d86
