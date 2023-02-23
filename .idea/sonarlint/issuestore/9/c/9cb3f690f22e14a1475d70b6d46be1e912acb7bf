@@ -1,0 +1,28 @@
+
+Qphp:S105"EReplace all tab characters in this file by sequences of white-spaces.
+_php:S103&"KSplit this 145 characters long line (which is greater than 120 authorized).(‡’åÆ
+_php:S103+"KSplit this 153 characters long line (which is greater than 120 authorized).(£ÚæŠ
+dphp:S1036"KSplit this 135 characters long line (which is greater than 120 authorized).(”Â™âùÿÿÿÿ
+_php:S103:"KSplit this 175 characters long line (which is greater than 120 authorized).(»ŸØ
+MWeb:TableWithoutCaptionCheck
+" Add a description to this table.(Ï¡£Îûÿÿÿÿ
+MWeb:TableWithoutCaptionCheck"" Add a description to this table.(¿‰˜ÿÿÿÿÿ
+?	Web:S5256""%Add "<th>" headers to this "<table>".(¿‰˜ÿÿÿÿÿ
+MWeb:TableWithoutCaptionCheck2" Add a description to this table.(¿‰˜ÿÿÿÿÿ
+?	Web:S52562"%Add "<th>" headers to this "<table>".(¿‰˜ÿÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÍŠ´ñüÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(„°ú÷üÿÿÿÿ
+g Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÍêÍÕ
+l Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÂÔé‚ùÿÿÿÿ
+g Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(ùÏñì
+g Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(°Áã²
+g Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(á»ş§
+l Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(Ü“—ƒùÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheckH";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÍŠ´ñüÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheckI";Add either an 'id' or a 'scope' attribute to this <th> tag.(„°ú÷üÿÿÿÿ
+g Web:TableHeaderHasIdOrScopeCheckJ";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÍêÍÕ
+l Web:TableHeaderHasIdOrScopeCheckK";Add either an 'id' or a 'scope' attribute to this <th> tag.(ÂÔé‚ùÿÿÿÿ
+g Web:TableHeaderHasIdOrScopeCheckL";Add either an 'id' or a 'scope' attribute to this <th> tag.(ùÏñì
+g Web:TableHeaderHasIdOrScopeCheckM";Add either an 'id' or a 'scope' attribute to this <th> tag.(°Áã²
+g Web:TableHeaderHasIdOrScopeCheckN";Add either an 'id' or a 'scope' attribute to this <th> tag.(á»ş§
+l Web:TableHeaderHasIdOrScopeCheckO";Add either an 'id' or a 'scope' attribute to this <th> tag.(Ü“—ƒùÿÿÿÿ

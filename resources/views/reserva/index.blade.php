@@ -25,8 +25,10 @@
                     @foreach($reservas as $reserva)
                         <tr>
                             <td>{{$reserva->fecha->fecha}}</td>
-                            @if($reserva->verify)
-                                <td class="px-4">Verificada</td>
+                            @if($reserva->en_espera)
+                                <td class="px-4">En espera</td>
+                            @elseif($reserva->verify)
+                                <td class="px-4 text-success">Verificada</td>
                             @else
                                 <td class="px-4 text-danger">No verificada</td>
                             @endif

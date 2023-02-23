@@ -8,6 +8,7 @@ set('application', 'assaig-backoffice');
 
 // Project repository
 set('repository', 'git@github.com:Assaig-2DAW/assaig-backoffice.git');
+set('branch', 'main');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
@@ -57,7 +58,7 @@ task('reload:php-fpm', function(){
 });
 
 task('rsync_function', function (){
-    run('rsync -avz -e "ssh -i /home/backoffice_dev/.ssh/nginx" --include="*.html" --include="*.css" --include="*.jpg" --include="*.jpeg" --include="*.png" --include="*.ico" --exclude="*" /var/www/assaig-backoffice/html backoffice_dev@54.85.146.153:/var/www/assaig-backoffice/');
+    run('rsync -avz -e "ssh -i /home/backoffice_dev/.ssh/nginx" --include="*.html" --include="*.css" --include="*.jpg" --include="*.jpeg" --include="*.png" --include="*.ico" --exclude="*.php" /var/www/assaig-backoffice/html backoffice_dev@54.85.146.153:/var/www/assaig-backoffice/');
 });
 
 task('artisan:queue:work', function () {

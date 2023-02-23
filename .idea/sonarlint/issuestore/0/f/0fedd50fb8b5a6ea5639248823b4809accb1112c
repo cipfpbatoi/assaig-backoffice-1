@@ -1,0 +1,16 @@
+
+dphp:S103"KSplit this 133 characters long line (which is greater than 120 authorized).(›äÊ¨øÿÿÿÿ
+dphp:S103#"KSplit this 143 characters long line (which is greater than 120 authorized).(¢œ­Ùÿÿÿÿÿ
+_php:S103'"KSplit this 183 characters long line (which is greater than 120 authorized).(ÿÑÌå
+MWeb:TableWithoutCaptionCheck
+" Add a description to this table.(Ï¡£Îûÿÿÿÿ
+MWeb:TableWithoutCaptionCheck" Add a description to this table.(¿‰˜ÿÿÿÿÿ
+?	Web:S5256"%Add "<th>" headers to this "<table>".(¿‰˜ÿÿÿÿÿ
+g Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(º…¦‡
+l Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(‡ÁÌäşÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(Ï‰Ÿ¤ûÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(öÛîãúÿÿÿÿ
+g Web:TableHeaderHasIdOrScopeCheck5";Add either an 'id' or a 'scope' attribute to this <th> tag.(º…¦‡
+l Web:TableHeaderHasIdOrScopeCheck6";Add either an 'id' or a 'scope' attribute to this <th> tag.(‡ÁÌäşÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheck7";Add either an 'id' or a 'scope' attribute to this <th> tag.(Ï‰Ÿ¤ûÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheck8";Add either an 'id' or a 'scope' attribute to this <th> tag.(öÛîãúÿÿÿÿ

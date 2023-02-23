@@ -1,0 +1,13 @@
+
+dphp:S103
+"KSplit this 125 characters long line (which is greater than 120 authorized).(¯‡Û¿ùÿÿÿÿ
+dphp:S103("KSplit this 136 characters long line (which is greater than 120 authorized).(ýö¤„øÿÿÿÿ
+dphp:S1034"KSplit this 133 characters long line (which is greater than 120 authorized).(µ‡ƒÛøÿÿÿÿ
+dphp:S103>"KSplit this 133 characters long line (which is greater than 120 authorized).(ÿêæüýÿÿÿÿ
+dphp:S103@"KSplit this 141 characters long line (which is greater than 120 authorized).(š²þ±þÿÿÿÿ
+dphp:S103J"KSplit this 129 characters long line (which is greater than 120 authorized).( •çýüÿÿÿÿ
+_php:S103L"KSplit this 135 characters long line (which is greater than 120 authorized).(ÒÓûÈ
+dphp:S103V"KSplit this 123 characters long line (which is greater than 120 authorized).(…Å¼ƒûÿÿÿÿ
+_php:S103["KSplit this 152 characters long line (which is greater than 120 authorized).(ºõ¸Ë
+_php:S103j"KSplit this 126 characters long line (which is greater than 120 authorized).(„¼ÿ«
+_php:S103n"KSplit this 148 characters long line (which is greater than 120 authorized).(ºõ¸Ë
