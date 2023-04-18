@@ -15,9 +15,12 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 
-const SERVER = 'http://api.saar.alcoitec.es/';
+
+
 class FechaController extends Controller
 {
+    const APPLICATION_JSON = 'application/json';
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +28,8 @@ class FechaController extends Controller
      */
     public function index(HttpClient $httpClient)
     {
-        $datos = $httpClient->get(SERVER . 'api/fechas', [
-            'Accept' => 'application/json',
+        $datos = $httpClient->get(env('API_ROUTE') . 'api/fechas', [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $dates = json_decode($datos)->data;
 
@@ -47,16 +50,16 @@ class FechaController extends Controller
      */
     public function create(HttpClient $httpClient)
     {
-        $profesores = $httpClient->get(SERVER . 'api/profesores', [
-            'Accept' => 'application/json',
+        $profesores = $httpClient->get(env('API_ROUTE') . 'api/profesores', [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $profesores = json_decode($profesores)->data;
         $profesoresSala = [];
         $profesoresCocina = [];
-        foreach ($profesores as $profesor){
-            if($profesor->tipo === 'sala'){
+        foreach ($profesores as $profesor) {
+            if ($profesor->tipo === 'sala') {
                 array_push($profesoresSala, $profesor);
-            }else{
+            } else {
                 array_push($profesoresCocina, $profesor);
             }
         }
@@ -80,7 +83,7 @@ class FechaController extends Controller
      */
     public function store(FechaUpdateRequest $request)
     {
-        $response = Http::asForm()->post(SERVER . 'api/fechas', [
+        $response = Http::asForm()->post(env('API_ROUTE') . 'api/fechas', [
             'fecha'=>$request->fecha,
             'pax'=>$request->pax,
             'overbooking'=>$request->overbooking,
@@ -93,7 +96,7 @@ class FechaController extends Controller
 
         if ($response->status()=== 201) {
             return redirect()->route('fechas.index');
-        }else{
+        } else {
             return redirect()->route('fechas.create');
         }
     }
@@ -106,8 +109,8 @@ class FechaController extends Controller
      */
     public function show(HttpClient $httpClient, Fecha $fecha)
     {
-        $fecha = $httpClient->get(SERVER . 'api/fechas/' . $fecha->id, [
-            'Accept' => 'application/json',
+        $fecha = $httpClient->get(env('API_ROUTE') . 'api/fechas/' . $fecha->id, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $fecha = json_decode($fecha)->data;
 
@@ -129,8 +132,8 @@ class FechaController extends Controller
      */
     public function edit(HttpClient $httpClient, Fecha $fecha)
     {
-        $fecha = $httpClient->get(SERVER . 'api/fechas/' . $fecha->id, [
-            'Accept' => 'application/json',
+        $fecha = $httpClient->get(env('API_ROUTE') . 'api/fechas/' . $fecha->id, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $fecha = json_decode($fecha)->data;
         $horarioApertura = $fecha->horario_apertura;
@@ -141,23 +144,22 @@ class FechaController extends Controller
         $horarioCierre = Carbon::parse($horarioCierre);
         $horarioCierre = $horarioCierre->format('H:i');
 
-        $profesores = $httpClient->get(SERVER . 'api/profesores', [
-            'Accept' => 'application/json',
+        $profesores = $httpClient->get(env('API_ROUTE') . 'api/profesores', [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $profesores = json_decode($profesores)->data;
-        $profesores_sala_fecha = $fecha->profesores_sala;
-        $profesores_cocina_fecha = $fecha->profesores_cocina;
+        $profesoresSalaFecha = $fecha->profesores_sala;
+        $profesoresCocinaFecha = $fecha->profesores_cocina;
 
-        $profesoresSalaNombres = array_column($profesores_sala_fecha, 'nombre');
-        $profesoresCocinaNombres = array_column($profesores_cocina_fecha, 'nombre');
+        $profesoresSalaNombres = array_column($profesoresSalaFecha, 'nombre');
+        $profesoresCocinaNombres = array_column($profesoresCocinaFecha, 'nombre');
 
         $profesoresSala = [];
         $profesoresCocina = [];
-        foreach ($profesores as $profesor){
-           if($profesor->tipo === 'sala')
-           {
+        foreach ($profesores as $profesor) {
+           if ($profesor->tipo === 'sala') {
                array_push($profesoresSala, $profesor);
-           }else{
+           } else {
                array_push($profesoresCocina, $profesor);
            }
         }
@@ -168,9 +170,19 @@ class FechaController extends Controller
         ];
 
         $titulo = 'Editar fecha';
-        return view('fecha.edit', compact('fecha', 'profesoresSalaNombres',
-            'profesoresCocinaNombres','profesoresSala', 'profesoresCocina', 'horarioApertura', 'horarioCierre',
-        'titulo', 'breadcrumbs'));
+        return view('fecha.edit',
+            compact(
+                'fecha',
+                'profesoresSalaNombres',
+                'profesoresCocinaNombres',
+                'profesoresSala',
+                'profesoresCocina',
+                'horarioApertura',
+                'horarioCierre',
+                'titulo',
+                'breadcrumbs'
+            )
+        );
     }
 
     /**
@@ -182,7 +194,7 @@ class FechaController extends Controller
      */
     public function update(FechaUpdateRequest $request, $fechaId)
     {
-        $response = Http::asForm()->put(SERVER . 'api/fechas/' . $fechaId, [
+        $response = Http::asForm()->put(env('API_ROUTE') . 'api/fechas/' . $fechaId, [
             'fecha'=>$request->fecha,
             'pax'=>$request->pax,
             'overbooking'=>$request->overbooking,
@@ -194,7 +206,7 @@ class FechaController extends Controller
         ]);
         if ($response->status()=== 201) {
             return redirect()->route('fechas.index');
-        }else{
+        } else {
             return $response->status();
         }
     }
@@ -207,10 +219,10 @@ class FechaController extends Controller
      */
     public function destroy(Fecha $fecha)
     {
-        $response = Http::delete(SERVER . 'api/fechas/' . $fecha->id, (array)$fecha);
+        $response = Http::delete(env('API_ROUTE') . 'api/fechas/' . $fecha->id, (array)$fecha);
         if ($response->status()=== 204) {
             return redirect()->route('fechas.index');
-        }else{
+        } else {
             return redirect()->route('fechas.index');
         }
     }
@@ -224,13 +236,13 @@ class FechaController extends Controller
      */
     public function fechasByProfesor(HttpClient $httpClient, $profesorId)
     {
-        $request = $httpClient->get(SERVER . 'api/profesores/' . $profesorId, [
-            'Accept' => 'application/json',
+        $request = $httpClient->get(env('API_ROUTE') . 'api/profesores/' . $profesorId, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $profesor = json_decode($request)->data;
         $profesor = $profesor->nombre;
-        $request = $httpClient->get(SERVER . 'api/fechas-profesor/' . $profesorId, [
-            'Accept' => 'application/json',
+        $request = $httpClient->get(env('API_ROUTE') . 'api/fechas-profesor/' . $profesorId, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $fechas = json_decode($request)->data;
 
@@ -265,7 +277,7 @@ class FechaController extends Controller
         $file->storeAs('/img/menus/', $fileName);
 
         $client = new Client();
-        $response = $client->request('POST', SERVER . 'api/fecha/add-menu', [
+        $response = $client->request('POST', env('API_ROUTE') . 'api/fecha/add-menu', [
             'multipart' => [
                 [
                     'name'     => 'menu',
@@ -281,7 +293,7 @@ class FechaController extends Controller
 
         if ($response->getStatusCode()=== 201) {
             return redirect()->route('fechas.index');
-        }else{
+        } else {
             return redirect()->route('home');
         }
     }

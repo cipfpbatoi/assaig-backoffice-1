@@ -11,9 +11,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 
-const SERVER = 'http://api.saar.alcoitec.es/';
 class ProfesorController extends Controller
 {
+    const APPLICATION_JSON = 'application/json';
+
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +22,8 @@ class ProfesorController extends Controller
      */
     public function index(HttpClient $httpClient)
     {
-        $datos = $httpClient->get(SERVER . 'api/profesores', [
-            'Accept' => 'application/json',
+        $datos = $httpClient->get(env('API_ROUTE') . 'api/profesores', [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $profesores = json_decode($datos)->data;
 
@@ -32,7 +33,7 @@ class ProfesorController extends Controller
         ];
 
         $titulo = 'Lista de profesores';
-        return view('profesor.index', compact('profesores','titulo', 'breadcrumbs'));
+        return view('profesor.index', compact('profesores', 'titulo', 'breadcrumbs'));
     }
 
     /**
@@ -61,10 +62,10 @@ class ProfesorController extends Controller
     public function store(ProfesorRequest $request)
     {
 
-        $response = Http::asForm()->post(SERVER . 'api/profesores', $request);
+        $response = Http::asForm()->post(env('API_ROUTE') . 'api/profesores', $request);
         if ($response->status()=== 201) {
             return redirect()->route('profesores.index');
-        }else{
+        } else {
             return redirect()->route('profesores.create');
         }
     }
@@ -77,8 +78,8 @@ class ProfesorController extends Controller
      */
     public function show(HttpClient $httpClient, Profesor $profesor)
     {
-        $profesor = $httpClient->get(SERVER . 'api/profesores/' . $profesor->id, [
-            'Accept' => 'application/json',
+        $profesor = $httpClient->get(env('API_ROUTE') . 'api/profesores/' . $profesor->id, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $profesor = json_decode($profesor)->data;
         return view('profesor.show', compact('profesor'));
@@ -92,8 +93,8 @@ class ProfesorController extends Controller
      */
     public function edit(HttpClient $httpClient, $id)
     {
-        $profesor = $httpClient->get(SERVER . 'api/profesores/' . $id, [
-            'Accept' => 'application/json',
+        $profesor = $httpClient->get(env('API_ROUTE') . 'api/profesores/' . $id, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $profesor = json_decode($profesor)->data;
         $breadcrumbs = [
@@ -115,7 +116,7 @@ class ProfesorController extends Controller
      */
     public function update(ProfesorRequest $request, $profesor)
     {
-        $response = Http::put(SERVER . 'api/profesores/'.$profesor, [
+        $response = Http::put(env('API_ROUTE') . 'api/profesores/'.$profesor, [
             'nombre'=>$request->nombre,
             'tipo'=>$request->tipo
         ]);
@@ -135,18 +136,18 @@ class ProfesorController extends Controller
      */
     public function destroy($profesorId)
     {
-        $response = Http::delete(SERVER . 'api/profesores/' . $profesorId, $profesorId);
+        $response = Http::delete(env('API_ROUTE') . 'api/profesores/' . $profesorId, $profesorId);
         if ($response->status()=== 204) {
             return redirect()->route('profesores.index');
-        }else{
+        } else {
             return redirect()->route('fechas.index');
         }
     }
 
     public function profesoresByFecha(HttpClient $httpClient, $fechaId)
     {
-        $request = $httpClient->get(SERVER . 'api/fechas/' . $fechaId, [
-            'Accept' => 'application/json',
+        $request = $httpClient->get(env('API_ROUTE') . 'api/fechas/' . $fechaId, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $fecha = json_decode($request)->data;
         $breadcrumbs = [

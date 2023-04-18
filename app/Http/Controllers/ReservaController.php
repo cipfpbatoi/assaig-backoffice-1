@@ -9,9 +9,10 @@ use App\Http\HttpClient;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 
-const SERVER = 'http://api.saar.alcoitec.es/';
 class ReservaController extends Controller
 {
+    const APPLICATION_JSON = 'application/json';
+
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +25,8 @@ class ReservaController extends Controller
             ['name' => 'Reservas']
         ];
 
-        $request = $httpClient->get(SERVER . 'api/reservas', [
-            'Accept' => 'application/json',
+        $request = $httpClient->get(env('API_ROUTE') . 'api/reservas', [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $reservas = json_decode($request)->data;
 
@@ -62,8 +63,8 @@ class ReservaController extends Controller
      */
     public function show(HttpClient $httpClient, $id)
     {
-        $reserva = $httpClient->get(SERVER . 'api/reservas/' . $id, [
-            'Accept' => 'application/json',
+        $reserva = $httpClient->get(env('API_ROUTE') . 'api/reservas/' . $id, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $reserva = json_decode($reserva)->data;
 
@@ -112,7 +113,7 @@ class ReservaController extends Controller
 
     public function confirmar(HttpClient $httpClient, $id)
     {
-        if ($httpClient->get(SERVER . 'api/confirmar-reserva/' . $id)) {
+        if ($httpClient->get(env('API_ROUTE') . 'api/confirmar-reserva/' . $id)) {
             return redirect()->route('reservas.index');
         } else {
             echo "Error al realizar la solicitud PUT";
@@ -121,8 +122,8 @@ class ReservaController extends Controller
 
     public function pendientes(HttpClient $httpClient)
     {
-        $request = $httpClient->get(SERVER . 'api/reservas-pendientes', [
-            'Accept' => 'application/json',
+        $request = $httpClient->get(env('API_ROUTE') . 'api/reservas-pendientes', [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $reservas = json_decode($request)->data;
 
@@ -145,11 +146,11 @@ class ReservaController extends Controller
 
     public function reservasFecha(HttpClient $httpClient, $fechaId)
     {
-        $request = $httpClient->get(SERVER . 'api/reservas-fecha/' . $fechaId, [
-            'Accept' => 'application/json',
+        $request = $httpClient->get(env('API_ROUTE') . 'api/reservas-fecha/' . $fechaId, [
+            'Accept' => self::APPLICATION_JSON,
         ]);
         $reservas = json_decode($request)->data;
-        $fechaRequest = $httpClient->get(SERVER . 'api/fechas/' . $fechaId);
+        $fechaRequest = $httpClient->get(env('API_ROUTE') . 'api/fechas/' . $fechaId);
         $fecha = json_decode($fechaRequest)->data;
         //$fecha = $reservas[0]->fecha;
         $breadcrumbs = [
